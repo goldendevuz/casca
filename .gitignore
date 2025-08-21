@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Env
+.env
+.venv/
+venv/
+.env.*
+.envrc
+
+# IDE
+.vscode/
+.idea/
+
+# Django
+/static/
+/media/
+/db.sqlite3
+
+# Byte-compiled / optimized / DLL files
+*.so
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ignore migration files, but not __init__.py
+**/migrations/*
+!**/migrations/__init__.py
+backups/
+
+# others
+playground/
+staticfiles/
