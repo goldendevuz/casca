@@ -1,8 +1,8 @@
-from rest_framework import permissions, filters
-# from django_filters.rest_framework import DjangoFilterBackend
-from apps.v1.barber.models import Barber, Favorite, History, SecuritySetting, WorkingHour
-from apps.v1.barber.permissions import IsOwnerOrAdmin
-from apps.v1.barber.serializers import (
+from rest_framework import permissions
+
+from api.permissions.barber import IsOwnerOrAdmin
+from core.infrastructure.db.models import Barber, Favorite, History, SecuritySetting, WorkingHour
+from ..serializers import (
     BarberSerializer,
     FavoriteSerializer,
     HistorySerializer,
@@ -15,7 +15,6 @@ class BarberViewSet(viewsets.ModelViewSet):
     queryset = Barber.objects.all()
     serializer_class = BarberSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrAdmin]
-    # filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['specialty', 'barbershop']
     search_fields = ['user__username', 'user__first_name', 'user__last_name', 'about']
     ordering_fields = ['rating', 'review_count']

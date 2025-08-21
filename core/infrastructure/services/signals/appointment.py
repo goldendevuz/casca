@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from .models import Appointment, Review
+from core.infrastructure.db.models import Appointment, Review
 
 @receiver(post_save, sender=Appointment)
 def handle_appointment_status_change(sender, instance, created, **kwargs):

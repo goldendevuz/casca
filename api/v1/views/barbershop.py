@@ -1,10 +1,10 @@
 from django.core.cache import cache
 # from django_filters.rest_framework import DjangoFilterBackend
+from api.permissions import IsAdminOrReadOnly
 from rest_framework import filters
 from rest_framework.response import Response
-from .models import Barbershop, Specialty, Service, Banner, ContactUs
-from .permissions import IsAdminOrReadOnly
-from .serializers import (
+from core.infrastructure.db.models import Barbershop, Specialty, Service, Banner, ContactUs
+from ..serializers import (
     BarbershopSerializer,
     SpecialtySerializer,
     ServiceSerializer,

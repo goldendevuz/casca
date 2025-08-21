@@ -3,17 +3,11 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 
+from core.domain.entities.enums import VIA_EMAIL, VIA_PHONE
+from core.domain.entities.enums.enums import EMAIL_EXPIRE, PHONE_EXPIRE
+
 from ..shared import BaseModel
 from config.settings.base import AUTH_USER_MODEL
-
-# 
-
-PATIENT, DOCTOR, ADMIN = ("patient", 'doctor', 'admin')
-VIA_EMAIL, VIA_PHONE = ("via_email", "via_phone")
-NEW, CODE_VERIFIED, DONE, PHOTO_DONE = ('new', 'code_verified', 'done', 'photo_done')
-
-PHONE_EXPIRE = 5
-EMAIL_EXPIRE = 1
 
 class UserConfirmation(BaseModel):
     TYPE_CHOICES = (

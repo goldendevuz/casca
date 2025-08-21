@@ -47,7 +47,11 @@ tunnel:
 	jprq http 7 -s casca_api
 open-bash:
 	sudo docker exec -it casca_api bash
+down:
+	sudo docker compose down
 up:
 	sudo docker compose up -d --build
 logs:
 	sudo docker compose logs
+restart:
+	sudo docker rm -f casca_api casca_nginx casca_redis & make down & make up

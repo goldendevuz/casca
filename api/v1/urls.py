@@ -1,8 +1,5 @@
 from django.urls import path
-
-from .views import CreateUserView, VerifyAPIView, GetNewVerification, \
-    UpdateUserInformationView, ChangeUserPhotoView, LoginView, LoginRefreshView, \
-    LogOutView, ResetPasswordView, PasswordGeneratorView, test_login, ForgetPasswordAPIView, ProfileDetailUpdateView
+from .views import *
 
 user_urlpatterns = [
     path('signup/', CreateUserView.as_view(), name='signup'),
@@ -22,8 +19,6 @@ user_urlpatterns = [
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-
-from apps.v1.system.views import NotificationViewSet, NotificationSettingViewSet, PaymentViewSet
 
 system_router = DefaultRouter()
 system_router.register(r'notifications', NotificationViewSet, basename='notification')

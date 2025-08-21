@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from .models import Profile, UserConfirmation
+from core.infrastructure.db.models import Profile, UserConfirmation
 
 
 

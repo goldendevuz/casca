@@ -1,24 +1,29 @@
 from adrf.serializers import ModelSerializer
+from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import FileExtensionValidator
+from config.settings.base import AUTH_USER_MODEL
+from core.infrastructure.db.models.user.user import CODE_VERIFIED, DONE, NEW, PHOTO_DONE, VIA_EMAIL, VIA_PHONE
+from core.infrastructure.services.tasks.user import process_user_photo
+from core.infrastructure.services.utility import check_user_type, check_username_phone_email, send_email, send_phone_code
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from rest_framework.exceptions import ValidationError, PermissionDenied, NotFound
 
-from apps.v1.shared.utility import check_username_phone_email, send_email, send_phone_code, check_user_type
-from .models import User, VIA_EMAIL, VIA_PHONE, NEW, CODE_VERIFIED, DONE, PHOTO_DONE, UserConfirmation, Profile
-from apps.v1.user.tasks import process_user_photo
+from core.infrastructure.db.models import UserConfirmation, Profile
+# VIA_EMAIL, VIA_PHONE, NEW, CODE_VERIFIED, DONE, PHOTO_DONE
 
+AUTH_USER_MODEL = get_user_model()
 class SignUpSerializer(ModelSerializer):
     username_phone_email = serializers.CharField(required=True, write_only=True)
 
     class Meta:
-        model = User
+        model = AUTH_USER_MODEL
         fields = list(
-            f.name for f in User._meta.fields if f.name not in ('password', 'is_staff', 'is_superuser'))
+            f.name for f in AUTH_USER_MODEL._meta.fields if f.name not in ('password', 'is_staff', 'is_superuser'))
         fields += ('username_phone_email',)
         extra_kwargs = {
             'auth_type': {'read_only': True, 'required': False},
@@ -34,7 +39,7 @@ class SignUpSerializer(ModelSerializer):
         validated_data.pop("username_phone_email", None)
 
         # user create
-        user = User(auth_type=auth_type, **validated_data)
+        user = AUTH_USER_MODEL(auth_type=auth_type, **validated_data)
         if password:
             user.set_password(password)
         user.save()
@@ -73,12 +78,12 @@ class SignUpSerializer(ModelSerializer):
         # return value.lower()
         value = value.lower()
         # ic(value)
-        if value and User.objects.filter(email=value, auth_status__in=[CODE_VERIFIED, DONE, PHOTO_DONE]).exists():
+        if value and AUTH_USER_MODEL.objects.filter(email=value, auth_status__in=[CODE_VERIFIED, DONE, PHOTO_DONE]).exists():
             data = {
                 "message": "Bu email allaqachon ma'lumotlar bazasida bor"
             }
             raise ValidationError(data)
-        elif value and User.objects.filter(phone=value, auth_status__in=[CODE_VERIFIED, DONE, PHOTO_DONE]).exists():
+        elif value and AUTH_USER_MODEL.objects.filter(phone=value, auth_status__in=[CODE_VERIFIED, DONE, PHOTO_DONE]).exists():
             data = {
                 "message": "Bu telefon raqami allaqachon ma'lumotlar bazasida bor"
             }
@@ -189,7 +194,7 @@ class LoginSerializer(TokenObtainPairSerializer):
             'password': data['password']
         }
         # user statusi tekshirilishi kerak
-        current_user = User.objects.filter(username__iexact=username).first()  # None
+        current_user = AUTH_USER_MODEL.objects.filter(username__iexact=username).first()  # None
 
         if current_user is not None and current_user.auth_status in [NEW, CODE_VERIFIED]:
             raise ValidationError(
@@ -217,7 +222,7 @@ class LoginSerializer(TokenObtainPairSerializer):
         return data
 
     def get_user(self, **kwargs):
-        users = User.objects.filter(**kwargs)
+        users = AUTH_USER_MODEL.objects.filter(**kwargs)
         # ic(user)
 
         if not users.exists():
@@ -266,7 +271,7 @@ class ResetPasswordSerializer(serializers.Serializer):
                     'message': "Email yoki telefon raqami kiritilishi shart!"
                 }
             )
-        user = User.objects.filter(Q(phone=username_phone_email) | Q(email=username_phone_email))
+        user = AUTH_USER_MODEL.objects.filter(Q(phone=username_phone_email) | Q(email=username_phone_email))
         if not user.exists():
             raise NotFound(detail="User not found")
         attrs['user'] = user.first()
@@ -282,9 +287,9 @@ class ForgetPasswordSerializer(serializers.Serializer):
 
         # verify_type ga qarab, qayerdan izlash kerakligini aniqlaymiz
         if verify_type == 'via_email':
-            user = User.objects.filter(email__iexact=verify_value).first()
+            user = AUTH_USER_MODEL.objects.filter(email__iexact=verify_value).first()
         else:  # via_phone
-            user = User.objects.filter(phone=verify_value).first()
+            user = AUTH_USER_MODEL.objects.filter(phone=verify_value).first()
 
         if not user:
             raise serializers.ValidationError("Bunday foydalanuvchi topilmadi.")

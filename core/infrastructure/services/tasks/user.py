@@ -1,8 +1,8 @@
 from celery import shared_task
+from core.infrastructure.db.models.user.user import User
 
 @shared_task
 def process_user_photo(user_id):
-    from apps.v1.user.models import User
     try:
         user = User.objects.get(id=user_id)
     except User.DoesNotExist:

@@ -3,4 +3,4 @@ from .shared import *
 from .barber import *
 from .barbershop import *
 from .system import *
-from .appointment import *
+from .appointment import * # appointment, rate, reason, review, reviewlike

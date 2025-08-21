@@ -1,6 +1,9 @@
 import random
 import string
 from django.utils.timezone import datetime
+from core.domain.entities.enums.enums import CODE_VERIFIED, NEW
+from core.infrastructure.db.models.user.user import VIA_EMAIL, VIA_PHONE
+from core.infrastructure.services.utility import check_username_phone_email, send_email, send_phone_code
 from rest_framework import permissions, status, generics
 from rest_framework.exceptions import ValidationError, NotFound
 from rest_framework.generics import CreateAPIView, UpdateAPIView, GenericAPIView
@@ -12,11 +15,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.decorators import api_view
 
-from apps.v1.shared.utils.response import success_response
-from apps.v1.shared.utility import send_email, check_username_phone_email, send_phone_code
-from .serializers import SignUpSerializer, ChangeUserInformation, ChangeUserPhotoSerializer, LoginSerializer, \
+from ..serializers import SignUpSerializer, ChangeUserInformation, ChangeUserPhotoSerializer, LoginSerializer, \
     LoginRefreshSerializer, LogoutSerializer, ResetPasswordSerializer, ForgetPasswordSerializer, ProfileSerializer
-from .models import User, CODE_VERIFIED, NEW, VIA_EMAIL, VIA_PHONE, UserConfirmation, Profile
+from core.infrastructure.db.models import User, UserConfirmation, Profile
 
 class CreateUserView(CreateAPIView):
     queryset = User.objects.all()
@@ -127,7 +128,7 @@ class ChangeUserPhotoView(APIView):
         if serializer.is_valid():
             user = request.user
             serializer.update(user, serializer.validated_data)
-            return success_response("Rasm muvaffaqiyatli o'zgartirildi", status_code=status.HTTP_200_OK)
+            return Response("Rasm muvaffaqiyatli o'zgartirildi", status_code=status.HTTP_200_OK)
 
         raise ValidationError(serializer.errors)
 

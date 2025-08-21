@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 
-from apps.v1.barbershop.models import Barbershop
+from core.infrastructure.db.models.barbershop.barbershop import Barbershop
 
 class Command(BaseCommand):
     help = 'Generate 1000 identical barbershop entries for testing'

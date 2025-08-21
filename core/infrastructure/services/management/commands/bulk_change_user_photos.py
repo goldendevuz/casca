@@ -2,8 +2,9 @@ import requests
 from io import BytesIO
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management.base import BaseCommand
-from apps.v1.user.models import User
-from apps.v1.user.tasks import process_user_photo
+
+from core.infrastructure.db.models.user.user import User
+from core.infrastructure.services.tasks.user import process_user_photo
 
 PHOTO_DONE = 'photo_done'
 

@@ -1,9 +1,7 @@
 from django.core.management.base import BaseCommand
-from apps.v1.user.models import User, VIA_PHONE, NEW
 from django.utils.crypto import get_random_string
 
-from apps.v1.user.models.user import PATIENT
-
+from core.infrastructure.db.models.user.user import NEW, PATIENT, VIA_PHONE, User
 
 class Command(BaseCommand):
     help = 'Generate 100 test users'

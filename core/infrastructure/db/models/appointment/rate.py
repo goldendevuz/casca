@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 from config.settings.base import AUTH_USER_MODEL
-from .. import Review
+from core.infrastructure.db.models.appointment.review import Review
 from core.infrastructure.db.models.shared.base import BaseModel
 
 

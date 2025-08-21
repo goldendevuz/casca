@@ -2,8 +2,8 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
-from .. import Appointment
 from config.settings.base import AUTH_USER_MODEL
+from core.infrastructure.db.models.appointment.appointment import Appointment
 from core.infrastructure.db.models.shared.base import BaseModel
 
 

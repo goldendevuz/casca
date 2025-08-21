@@ -1,11 +1,10 @@
 from django.db.models import Q
+from api.permissions import IsAppointmentOwnerOrBarberOrAdmin
 from rest_framework import permissions
 from adrf import viewsets
-from drf_spectacular.utils import extend_schema_view, extend_schema
 
-from .models import Appointment, Reason, Review, Rate, ReviewLike
-from .permissions import IsAppointmentOwnerOrBarberOrAdmin
-from .serializers import (
+from core.infrastructure.db.models import Appointment, Reason, Review, Rate, ReviewLike
+from ..serializers import (
     AppointmentSerializer, ReasonSerializer,
     ReviewSerializer, RateSerializer, ReviewLikeSerializer
 )

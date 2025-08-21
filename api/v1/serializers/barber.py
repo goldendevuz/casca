@@ -1,8 +1,7 @@
 from adrf.serializers import ModelSerializer
 from rest_framework import serializers
 
-from apps.v1.barbershop.models import Specialty, Barbershop
-from apps.v1.barber.models import Barber, Favorite, History, SecuritySetting, WorkingHour
+from core.infrastructure.db.models import Specialty, Barbershop, Barber, Favorite, History, SecuritySetting, WorkingHour
 
 class BarberSerializer(ModelSerializer):
     specialty = serializers.PrimaryKeyRelatedField(

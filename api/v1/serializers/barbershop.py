@@ -1,5 +1,5 @@
 from adrf import serializers
-from .models import Barbershop, Specialty, Service, Banner, ContactUs
+from core.infrastructure.db.models import Barbershop, Specialty, Service, Banner, ContactUs
 
 class BarbershopSerializer(serializers.ModelSerializer):
     class Meta:

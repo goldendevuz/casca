@@ -1,9 +1,10 @@
+from api.permissions.system import NotificationPermission, NotificationSettingPermission, PaymentPermission
+from api.v1.serializers.system import NotificationSettingSerializer, PaymentSerializer
+from ..serializers import NotificationSerializer
 from rest_framework import permissions, filters
 # from django_filters.rest_framework import DjangoFilterBackend
 
-from apps.v1.system.models import Notification, NotificationSetting, Payment
-from apps.v1.system.permissions import NotificationPermission, NotificationSettingPermission, PaymentPermission
-from apps.v1.system.serializers import NotificationSerializer, NotificationSettingSerializer, PaymentSerializer
+from core.infrastructure.db.models import Notification, NotificationSetting, Payment
 from adrf import viewsets
 
 class NotificationViewSet(viewsets.ModelViewSet):
