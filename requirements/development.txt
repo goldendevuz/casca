@@ -4,3 +4,4 @@ ruff
 pytest
 pytest-django
 uvicorn
+drf-material

@@ -45,6 +45,7 @@ THIRD_APPS = {
     'drf_standardized_errors',
     'schema_viewer',
     'adrf',
+    'django_filters',
     'drf_spectacular',
     'drf_spectacular_sidecar',  # required for Django collectstatic discovery
     'rest_framework_json_api',

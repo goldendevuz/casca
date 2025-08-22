@@ -14,7 +14,7 @@ RUN apt-get update && \
 # Install Python deps (cached if requirements unchanged)
 COPY requirements/ ./requirements/
 RUN pip install --upgrade pip && \
-    pip install --prefix=/install --no-cache-dir -r requirements/development.txt
+    pip install --prefix=/install -r requirements/development.txt
 
 # Install jprq (light binary, no system deps)
 RUN curl -fsSL https://jprq.io/install.sh | bash
