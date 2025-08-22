@@ -3,7 +3,7 @@ from django.core.cache import cache
 from api.permissions import IsAdminOrReadOnly
 from rest_framework import filters
 from rest_framework.response import Response
-from core.domain.entities.models.barbershop import Barbershop, Specialty, Service, Banner, ContactUs
+from domain.entities.models.barbershop import Barbershop, Specialty, Service, Banner, ContactUs
 from ..serializers import (
     BarbershopSerializer,
     SpecialtySerializer,

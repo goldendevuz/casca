@@ -6,7 +6,7 @@ from .envs import (DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER, SECRET_KEY, 
                      EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME, REDIS_URL)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = SECRET_KEY
@@ -51,14 +51,7 @@ THIRD_APPS = {
 }
 
 LOCAL_APPS = [
-    "core",
-    "api",
-    # 'apps.v1.user',
-    # 'apps.v1.shared',
-    # 'apps.v1.barber',
-    # 'apps.v1.barbershop',
-    # 'apps.v1.appointment',
-    # 'apps.v1.system',
+    "infrastructure",
 ]
 
 INSTALLED_APPS += THIRD_APPS
@@ -117,7 +110,7 @@ else:
         }
     }
 
-AUTH_USER_MODEL = "core.User"
+AUTH_USER_MODEL = "infrastructure.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

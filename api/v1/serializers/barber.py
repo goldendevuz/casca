@@ -1,7 +1,8 @@
 from adrf.serializers import ModelSerializer
 from rest_framework import serializers
 
-from core.domain.entities.models.barber import Specialty, Barbershop, Barber, Favorite, History, SecuritySetting, WorkingHour
+from domain.entities.models.barbershop import Barbershop, Specialty
+from domain.entities.models.barber import Barber, Favorite, History, SecuritySetting, WorkingHour
 
 class BarberSerializer(ModelSerializer):
     specialty = serializers.PrimaryKeyRelatedField(

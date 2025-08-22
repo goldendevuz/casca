@@ -1,9 +1,9 @@
 import random
 import string
 from django.utils.timezone import datetime
-from core.domain.entities.enums.enums import CODE_VERIFIED, NEW
-from core.domain.entities.enums import VIA_EMAIL, VIA_PHONE
-from core.infrastructure.services.utility import check_username_phone_email, send_email, send_phone_code
+# from core.domain.entities.enums.enums import CODE_VERIFIED, NEW
+# from core.domain.entities.enums import VIA_EMAIL, VIA_PHONE
+# from core.infrastructure.services.utility import check_username_phone_email, send_email, send_phone_code
 from rest_framework import permissions, status, generics
 from rest_framework.exceptions import ValidationError, NotFound
 from rest_framework.generics import CreateAPIView, UpdateAPIView, GenericAPIView
@@ -17,7 +17,7 @@ from rest_framework.decorators import api_view
 
 from ..serializers import SignUpSerializer, ChangeUserInformation, ChangeUserPhotoSerializer, LoginSerializer, \
     LoginRefreshSerializer, LogoutSerializer, ResetPasswordSerializer, ForgetPasswordSerializer, ProfileSerializer
-from core.domain.entities.models.user import User, UserConfirmation, Profile
+from domain.entities.models.user import User, UserConfirmation, Profile
 
 class CreateUserView(CreateAPIView):
     queryset = User.objects.all()

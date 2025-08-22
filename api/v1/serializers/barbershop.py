@@ -1,5 +1,5 @@
 from adrf import serializers
-from core.domain.entities.models.barbershop import Barbershop, Specialty, Service, Banner, ContactUs
+from domain.entities.models.barbershop import Barbershop, Specialty, Service, Banner, ContactUs
 
 class BarbershopSerializer(serializers.ModelSerializer):
     class Meta:

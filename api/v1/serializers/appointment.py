@@ -2,7 +2,7 @@ from datetime import datetime
 
 from adrf.serializers import ModelSerializer
 from django.utils import timezone
-from core.domain.entities.models.appointment import Appointment, Reason, Rate, Review, ReviewLike
+from domain.entities.models.appointment import Appointment, Reason, Rate, Review, ReviewLike
 from rest_framework import serializers
 
 class ReasonSerializer(serializers.ModelSerializer):

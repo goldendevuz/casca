@@ -27,9 +27,10 @@ FROM python:3.13-slim AS runtime
 
 WORKDIR /usr/src/app
 
-# Install minimal tools needed at runtime (make for your commands)
+# Install minimal tools needed at runtime (make + sqlite3 CLI)
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends make && \
+    apt-get install -y --no-install-recommends \
+        make sqlite3 libsqlite3-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy installed Python packages
