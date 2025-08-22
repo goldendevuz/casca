@@ -1,6 +1,6 @@
 from .banner import Banner
-from .contactus import ContactUs
 from .barbershop import Barbershop
+from .contactus import ContactUs
 from .service import Service
 from .specialty import Specialty
 

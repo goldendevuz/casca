@@ -1,10 +1,13 @@
-import time
 import asyncio
+import time
+
 from django.core.management.base import BaseCommand
 
 from domain.entities.models.user import User
+
 REPEAT_COUNT = 100_000
 STEP = 10_000
+
 
 def sync_fetch_user():
     for i in range(REPEAT_COUNT):
@@ -12,11 +15,13 @@ def sync_fetch_user():
         if (i + 1) % STEP == 0:
             print(f"Sync progress: {i + 1} done")
 
+
 async def async_fetch_user():
     for i in range(REPEAT_COUNT):
         _ = await User.async_objects.afirst()
         if (i + 1) % STEP == 0:
             print(f"Async progress: {i + 1} done")
+
 
 class Command(BaseCommand):
     help = "Compare performance of sync vs async ORM calls with larger query count"

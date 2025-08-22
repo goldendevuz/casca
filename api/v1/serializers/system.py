@@ -8,6 +8,7 @@ from domain.entities.models.system import (
     Payment,
 )
 
+
 class NotificationSerializer(ModelSerializer):
     class Meta:
         model = Notification
@@ -21,12 +22,14 @@ class NotificationSerializer(ModelSerializer):
             raise serializers.ValidationError("Notification date and time cannot be in the past.")
         return value
 
+
 class NotificationSettingSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)  # faqat o'qish uchun
 
     class Meta:
         model = NotificationSetting
         fields = '__all__'
+
 
 class PaymentSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)  # faqat o'qish uchun

@@ -1,10 +1,12 @@
 import random
 import string
+
 from django.utils.timezone import datetime
 # from core.domain.entities.enums.enums import CODE_VERIFIED, NEW
 # from core.domain.entities.enums import VIA_EMAIL, VIA_PHONE
 # from core.infrastructure.services.utility import check_username_phone_email, send_email, send_phone_code
 from rest_framework import permissions, status, generics
+from rest_framework.decorators import api_view
 from rest_framework.exceptions import ValidationError, NotFound
 from rest_framework.generics import CreateAPIView, UpdateAPIView, GenericAPIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -13,24 +15,24 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from rest_framework.decorators import api_view
 
+from domain.entities.models.user import User, UserConfirmation, Profile
 from ..serializers import SignUpSerializer, ChangeUserInformation, ChangeUserPhotoSerializer, LoginSerializer, \
     LoginRefreshSerializer, LogoutSerializer, ResetPasswordSerializer, ForgetPasswordSerializer, ProfileSerializer
-from domain.entities.models.user import User, UserConfirmation, Profile
+
 
 class CreateUserView(CreateAPIView):
     queryset = User.objects.all()
-    permission_classes = (permissions.AllowAny, )
+    permission_classes = (permissions.AllowAny,)
     serializer_class = SignUpSerializer
 
 
 class VerifyAPIView(APIView):
-    permission_classes = (IsAuthenticated, )
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
-        user = self.request.user             # user ->
-        code = self.request.data.get('code') # 4083
+        user = self.request.user  # user ->
+        code = self.request.data.get('code')  # 4083
 
         self.check_verify(user, code)
         return Response(
@@ -42,7 +44,7 @@ class VerifyAPIView(APIView):
         )
 
     @staticmethod
-    def check_verify(user, code):       # 12:03 -> 12:05 => expiration_time=12:05   12:04
+    def check_verify(user, code):  # 12:03 -> 12:05 => expiration_time=12:05   12:04
         verifies = user.verify_codes.filter(expiration_time__gte=datetime.now(), code=code, is_confirmed=False)
         usr = UserConfirmation.objects.filter(user_id=user.id, code=code).first()
         if not verifies.exists():
@@ -60,6 +62,7 @@ class VerifyAPIView(APIView):
                 user.email = usr.verify_value
             user.save()
         return True
+
 
 class GetNewVerification(APIView):
     permission_classes = [IsAuthenticated, ]
@@ -120,6 +123,7 @@ class UpdateUserInformationView(UpdateAPIView):
         }
         return Response(data, status=status.HTTP_200_OK)
 
+
 class ChangeUserPhotoView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -132,11 +136,14 @@ class ChangeUserPhotoView(APIView):
 
         raise ValidationError(serializer.errors)
 
+
 class LoginView(TokenObtainPairView):
     serializer_class = LoginSerializer
 
+
 class LoginRefreshView(TokenRefreshView):
     serializer_class = LoginRefreshSerializer
+
 
 class LogOutView(APIView):
     serializer_class = LogoutSerializer
@@ -159,6 +166,7 @@ class LogOutView(APIView):
                 "message": "Token is invalid or expired"
             }
             raise ValidationError(data)
+
 
 class ResetPasswordView(APIView):
     permission_classes = [AllowAny]
@@ -186,6 +194,7 @@ class ResetPasswordView(APIView):
             }, status=status.HTTP_200_OK
         )
 
+
 class ForgetPasswordAPIView(GenericAPIView):
     serializer_class = ForgetPasswordSerializer
     permission_classes = [AllowAny]
@@ -196,8 +205,10 @@ class ForgetPasswordAPIView(GenericAPIView):
         data = serializer.save()
         return Response(data, status=status.HTTP_200_OK)
 
+
 class PasswordGeneratorView(APIView):
     permission_classes = [permissions.AllowAny]
+
     def get(self, request):
         length = int(request.query_params.get('length', 8))
         include_upper = request.query_params.get('upper', 'true') == 'true'
@@ -224,9 +235,11 @@ class PasswordGeneratorView(APIView):
         password = ''.join(random.SystemRandom().choice(charset) for _ in range(length))
         return Response({"password": password}, status=status.HTTP_200_OK)
 
+
 @api_view(['GET'])
 def test_login(request):
     return Response({"message": "Hello, world!"})
+
 
 class ProfileDetailUpdateView(generics.RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer

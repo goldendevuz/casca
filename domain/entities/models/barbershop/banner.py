@@ -3,6 +3,7 @@ from django.db import models
 
 from domain.entities.models.shared import BaseModel
 
+
 class Banner(BaseModel):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)

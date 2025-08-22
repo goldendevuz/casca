@@ -1,9 +1,10 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from config.settings.base import AUTH_USER_MODEL
 
-from domain.entities.models.shared import BaseModel
+from config.settings.base import AUTH_USER_MODEL
 from domain.entities.models.barbershop import Barbershop, Specialty
+from domain.entities.models.shared import BaseModel
+
 
 class Barber(BaseModel):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='barber_profile')
@@ -27,6 +28,6 @@ class Barber(BaseModel):
         if not full_name.strip():
             full_name = self.user.username
         return f"Dr. {full_name}"
-        
+
     class Meta:
         app_label = "infrastructure"

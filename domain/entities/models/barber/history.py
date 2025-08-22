@@ -3,6 +3,7 @@ from django.db import models
 from domain.entities.models.shared import BaseModel
 from . import Barber
 
+
 class History(BaseModel):
     barber = models.ForeignKey(Barber, on_delete=models.CASCADE, related_name='history_logs')
     action = models.TextField()

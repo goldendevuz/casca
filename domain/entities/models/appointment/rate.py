@@ -1,9 +1,10 @@
-from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db import models
 
 from config.settings.base import AUTH_USER_MODEL
-from .review import Review
 from domain.entities.models.shared import BaseModel
+from .review import Review
+
 
 class Rate(BaseModel):
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='ratings')

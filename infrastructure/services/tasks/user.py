@@ -1,5 +1,7 @@
 from celery import shared_task
+
 from domain.entities.models.user import User
+
 
 @shared_task
 def process_user_photo(user_id):

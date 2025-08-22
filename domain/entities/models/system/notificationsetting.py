@@ -3,6 +3,7 @@ from django.db import models
 from config.settings.base import AUTH_USER_MODEL
 from domain.entities.models.shared import BaseModel
 
+
 class NotificationSetting(BaseModel):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notification_settings')
     general = models.BooleanField(default=True)

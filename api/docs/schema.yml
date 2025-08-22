@@ -1,5 +1,5 @@
 openapi: 3.0.3
 info:
-  title: MyProject API
-  version: 1.0.0
-paths: {}
+    title: MyProject API
+    version: 1.0.0
+paths: { }

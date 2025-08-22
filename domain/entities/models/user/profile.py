@@ -1,11 +1,12 @@
 from django.core.exceptions import ValidationError
-from django.utils import timezone
 from django.db import models
+from django.utils import timezone
 
 from config.settings.base import AUTH_USER_MODEL
 from ..shared import BaseModel
 
-# 
+
+#
 
 class Profile(BaseModel):
     GENDER_CHOICES = [

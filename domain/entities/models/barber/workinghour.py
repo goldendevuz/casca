@@ -4,6 +4,7 @@ from django.db import models
 from domain.entities.models.shared import BaseModel
 from . import Barber
 
+
 class WorkingHour(BaseModel):
     barber = models.ForeignKey(Barber, on_delete=models.CASCADE, related_name='working_hours')
     day_of_week = models.IntegerField(choices=[

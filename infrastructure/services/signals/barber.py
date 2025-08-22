@@ -3,6 +3,7 @@ from django.dispatch import receiver
 
 from domain.entities.models.barber import Barber, History, WorkingHour, SecuritySetting
 
+
 @receiver(post_save, sender=Barber)
 def create_barber_related_data(sender, instance, created, **kwargs):
     if created:

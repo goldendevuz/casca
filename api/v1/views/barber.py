@@ -1,3 +1,4 @@
+from adrf import viewsets
 from rest_framework import permissions
 
 from api.permissions.barber import IsOwnerOrAdmin
@@ -9,7 +10,7 @@ from ..serializers import (
     SecuritySettingSerializer,
     WorkingHourSerializer
 )
-from adrf import viewsets
+
 
 class BarberViewSet(viewsets.ModelViewSet):
     queryset = Barber.objects.all()
@@ -22,6 +23,7 @@ class BarberViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class FavoriteViewSet(viewsets.ModelViewSet):
     queryset = Favorite.objects.all()
@@ -39,6 +41,7 @@ class FavoriteViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+
 class HistoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = History.objects.all()
     serializer_class = HistorySerializer
@@ -47,6 +50,7 @@ class HistoryViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_fields = ['barber']
     ordering_fields = ['timestamp']
     ordering = ['-timestamp']
+
 
 class SecuritySettingViewSet(viewsets.ModelViewSet):
     queryset = SecuritySetting.objects.all()
@@ -61,6 +65,7 @@ class SecuritySettingViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class WorkingHourViewSet(viewsets.ModelViewSet):
     queryset = WorkingHour.objects.all()

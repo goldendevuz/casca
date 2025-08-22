@@ -1,12 +1,15 @@
-import requests
 from io import BytesIO
+
+import requests
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management.base import BaseCommand
 
 from domain.entities.models.user import User
+
 # from core.infrastructure.services.tasks.user import process_user_photo
 
 PHOTO_DONE = 'photo_done'
+
 
 class Command(BaseCommand):
     help = 'Assign realistic AI-generated photos from thispersondoesnotexist.com'

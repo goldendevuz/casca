@@ -2,6 +2,7 @@ from django.db import models
 
 from domain.entities.models.shared.base import BaseModel
 
+
 class Reason(BaseModel):
     class RescheduleReason(models.TextChoices):
         CLASH = "clash", "Schedule clash"

@@ -3,6 +3,7 @@ from django.dispatch import receiver
 
 from domain.entities.models.appointment import Appointment, Review
 
+
 @receiver(post_save, sender=Appointment)
 def handle_appointment_status_change(sender, instance, created, **kwargs):
     if not created:

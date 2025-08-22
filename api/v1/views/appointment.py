@@ -1,13 +1,14 @@
-from django.db.models import Q
-from api.permissions import IsAppointmentOwnerOrBarberOrAdmin
-from rest_framework import permissions
 from adrf import viewsets
+from django.db.models import Q
+from rest_framework import permissions
 
+from api.permissions import IsAppointmentOwnerOrBarberOrAdmin
 from domain.entities.models.appointment import Appointment, Reason, Review, Rate, ReviewLike
 from ..serializers import (
     AppointmentSerializer, ReasonSerializer,
     ReviewSerializer, RateSerializer, ReviewLikeSerializer
 )
+
 
 class AppointmentViewSet(viewsets.ModelViewSet):
     serializer_class = AppointmentSerializer
@@ -29,9 +30,11 @@ class AppointmentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+
 class ReasonViewSet(viewsets.ModelViewSet):
     queryset = Reason.objects.all()
     serializer_class = ReasonSerializer
+
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
@@ -45,6 +48,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+
 class RateViewSet(viewsets.ModelViewSet):
     queryset = Rate.objects.all()
     serializer_class = RateSerializer
@@ -52,6 +56,7 @@ class RateViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class ReviewLikeViewSet(viewsets.ModelViewSet):
     queryset = ReviewLike.objects.all()

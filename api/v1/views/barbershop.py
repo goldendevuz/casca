@@ -1,8 +1,10 @@
+from adrf import viewsets
 from django.core.cache import cache
-# from django_filters.rest_framework import DjangoFilterBackend
-from api.permissions import IsAdminOrReadOnly
 from rest_framework import filters
 from rest_framework.response import Response
+
+# from django_filters.rest_framework import DjangoFilterBackend
+from api.permissions import IsAdminOrReadOnly
 from domain.entities.models.barbershop import Barbershop, Specialty, Service, Banner, ContactUs
 from ..serializers import (
     BarbershopSerializer,
@@ -11,7 +13,7 @@ from ..serializers import (
     BannerSerializer,
     ContactUsSerializer,
 )
-from adrf import viewsets
+
 
 class BarbershopViewSet(viewsets.ModelViewSet):
     queryset = Barbershop.objects.all()
@@ -70,6 +72,7 @@ class BarbershopViewSet(viewsets.ModelViewSet):
         cache.delete('barbershop_list')
         return response
 
+
 class SpecialtyViewSet(viewsets.ModelViewSet):
     queryset = Specialty.objects.all()
     serializer_class = SpecialtySerializer
@@ -78,6 +81,7 @@ class SpecialtyViewSet(viewsets.ModelViewSet):
     filterset_fields = ['name']
     search_fields = ['name', 'description']
     ordering_fields = ['name', 'created_at']
+
 
 class ServiceViewSet(viewsets.ModelViewSet):
     queryset = Service.objects.all()
@@ -88,6 +92,7 @@ class ServiceViewSet(viewsets.ModelViewSet):
     search_fields = ['title', 'description']
     ordering_fields = ['duration', 'created_at']
 
+
 class BannerViewSet(viewsets.ModelViewSet):
     queryset = Banner.objects.all()
     serializer_class = BannerSerializer
@@ -96,6 +101,7 @@ class BannerViewSet(viewsets.ModelViewSet):
     filterset_fields = ['is_active']
     search_fields = ['title', 'description']
     ordering_fields = ['created_at']
+
 
 class ContactUsViewSet(viewsets.ModelViewSet):
     queryset = ContactUs.objects.all()

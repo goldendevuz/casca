@@ -1,5 +1,7 @@
 from typing import Callable
+
 from django.http import HttpRequest, HttpResponse
+
 
 class SimpleAuthMiddleware:
     def __init__(self, get_response: Callable[[HttpRequest], HttpResponse]):

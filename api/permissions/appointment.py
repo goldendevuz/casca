@@ -1,10 +1,12 @@
 from rest_framework import permissions
 
+
 class IsAppointmentOwnerOrBarberOrAdmin(permissions.BasePermission):
     """
     Faqat appointment egasi (foydalanuvchi),
     tegishli shifokor yoki adminlarga ruxsat beradi.
     """
+
     def has_permission(self, request, view):
         # Bu yerda umumiy permission, masalan login qilinganligini tekshiramiz
         return request.user and request.user.is_authenticated

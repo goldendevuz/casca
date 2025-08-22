@@ -2,13 +2,16 @@ from datetime import datetime
 
 from adrf.serializers import ModelSerializer
 from django.utils import timezone
-from domain.entities.models.appointment import Appointment, Reason, Rate, Review, ReviewLike
 from rest_framework import serializers
+
+from domain.entities.models.appointment import Appointment, Reason, Rate, Review, ReviewLike
+
 
 class ReasonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reason
         fields = '__all__'
+
 
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,6 +34,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
 
         return attrs
 
+
 class ReviewSerializer(ModelSerializer):
     appointment = serializers.PrimaryKeyRelatedField(queryset=Appointment.objects.all())
 
@@ -45,12 +49,14 @@ class ReviewSerializer(ModelSerializer):
             raise serializers.ValidationError('Text is too long (max 1000 characters).')
         return value
 
+
 class RateSerializer(serializers.ModelSerializer):
     review = serializers.PrimaryKeyRelatedField(queryset=Review.objects.all())
 
     class Meta:
         model = Rate
         exclude = ['user']
+
 
 class ReviewLikeSerializer(serializers.ModelSerializer):
     review = serializers.PrimaryKeyRelatedField(queryset=Review.objects.all())

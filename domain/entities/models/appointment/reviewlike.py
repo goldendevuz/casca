@@ -5,6 +5,7 @@ from config.settings.base import AUTH_USER_MODEL
 from .review import Review
 from ..shared import BaseModel
 
+
 class ReviewLike(BaseModel):
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='liked_reviews')
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name='likes')

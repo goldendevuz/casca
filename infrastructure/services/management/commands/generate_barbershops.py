@@ -2,6 +2,7 @@ from django.core.management.base import BaseCommand
 
 from domain.entities.models.barbershop import Barbershop
 
+
 class Command(BaseCommand):
     help = 'Generate 1000 identical barbershop entries for testing'
 

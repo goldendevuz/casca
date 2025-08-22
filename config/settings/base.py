@@ -2,8 +2,8 @@ from datetime import timedelta
 from pathlib import Path
 
 from .envs import (DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER, SECRET_KEY, DEBUG, ALLOWED_HOSTS,
-                     CSRF_TRUSTED_ORIGINS, CORS_ALLOWED_ORIGINS,
-                     EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME, REDIS_URL)
+                   CSRF_TRUSTED_ORIGINS, CORS_ALLOWED_ORIGINS,
+                   EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME, REDIS_URL)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -127,8 +127,6 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
-
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_PAGINATION_CLASS':
@@ -180,7 +178,7 @@ REST_FRAMEWORK = {
     ],
     "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    
+
 }
 
 SIMPLE_JWT = {
@@ -285,6 +283,6 @@ SPECTACULAR_SETTINGS = {
     'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
     'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
     'REDOC_DIST': 'SIDECAR',
-    'COMPONENT_SPLIT_REQUEST':True,
-    'SCHEMA_PATH_PREFIX': r'/api/v[0-9]/', # Example: /api/v1/users will get 'users' tag
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SCHEMA_PATH_PREFIX': r'/api/v[0-9]/',  # Example: /api/v1/users will get 'users' tag
 }

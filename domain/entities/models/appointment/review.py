@@ -6,6 +6,7 @@ from config.settings.base import AUTH_USER_MODEL
 from domain.entities.models.appointment import Appointment
 from domain.entities.models.shared import BaseModel
 
+
 class Review(BaseModel):
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviews')
     appointment = models.ForeignKey(Appointment, on_delete=models.CASCADE, related_name='reviews')

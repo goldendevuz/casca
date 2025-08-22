@@ -4,6 +4,7 @@ from django.db import models
 from config.settings.base import AUTH_USER_MODEL
 from domain.entities.models.shared import BaseModel
 
+
 class Payment(BaseModel):
     class Status(models.TextChoices):
         PENDING = 'pending', 'Pending'
@@ -18,7 +19,8 @@ class Payment(BaseModel):
     notes = models.TextField(blank=True)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
     reviewed_at = models.DateTimeField(blank=True, null=True)
-    reviewed_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='reviewed_payments')
+    reviewed_by = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
+                                    related_name='reviewed_payments')
 
     def clean(self):
         super().clean()

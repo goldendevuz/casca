@@ -4,6 +4,8 @@ from django.utils.timezone import now
 
 from domain.entities.models.system import Notification, NotificationSetting, Payment
 from domain.entities.models.user import User
+
+
 # from core.infrastructure.services.tasks.system import send_notification
 
 @receiver(post_save, sender=User)
@@ -11,6 +13,7 @@ def create_notification_settings(sender, instance, created, **kwargs):
     if created:
         NotificationSetting.objects.create(user=instance)
         print(f"Notification settings created for {instance}")
+
 
 @receiver(pre_save, sender=Payment)
 def validate_payment_status(sender, instance, **kwargs):
@@ -26,6 +29,7 @@ def validate_payment_status(sender, instance, **kwargs):
                     instance.reviewed_by = instance.user
                 if not instance.reviewed_at:
                     instance.reviewed_at = now()
+
 
 @receiver(post_save, sender=Notification)
 def schedule_notification_task(sender, instance, created, **kwargs):

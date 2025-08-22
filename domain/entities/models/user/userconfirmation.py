@@ -1,12 +1,13 @@
 from datetime import timedelta
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 
-from domain.entities.enums.enums import EMAIL_EXPIRE, PHONE_EXPIRE, VIA_EMAIL, VIA_PHONE
-
-from ..shared import BaseModel
 from config.settings.base import AUTH_USER_MODEL
+from domain.entities.enums.enums import EMAIL_EXPIRE, PHONE_EXPIRE, VIA_EMAIL, VIA_PHONE
+from ..shared import BaseModel
+
 
 class UserConfirmation(BaseModel):
     TYPE_CHOICES = (

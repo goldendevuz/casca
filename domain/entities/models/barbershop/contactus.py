@@ -3,6 +3,7 @@ from django.db import models
 
 from domain.entities.models.shared import BaseModel
 
+
 class ContactUs(BaseModel):
     title = models.CharField(max_length=100)
     icon = models.CharField(max_length=100, help_text="Icon CSS class or name")
@@ -23,6 +24,6 @@ class ContactUs(BaseModel):
     def save(self, *args, **kwargs):
         self.full_clean()  # clean() chaqiriladi
         super().save(*args, **kwargs)
-        
+
     class Meta:
         app_label = "infrastructure"

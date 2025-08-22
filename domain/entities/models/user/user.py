@@ -1,19 +1,22 @@
 import random
 import uuid
+
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import FileExtensionValidator, RegexValidator
 from django.db import models
-from domain.entities.enums.enums import ADMIN, CODE_VERIFIED, DOCTOR, DONE, NEW, PATIENT, PHOTO_DONE, VIA_EMAIL, VIA_PHONE
-from infrastructure.services.managers import UserManager
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from ..shared import BaseModel
+from domain.entities.enums.enums import ADMIN, CODE_VERIFIED, DOCTOR, DONE, NEW, PATIENT, PHOTO_DONE, VIA_EMAIL, \
+    VIA_PHONE
+from infrastructure.services.managers import UserManager
 from .userconfirmation import UserConfirmation
+from ..shared import BaseModel
 
 phone_regex = RegexValidator(
     regex=r'^\+998\d{9}$',
     message="Telefon raqam quyidagi formatda bo'lishi kerak: '+998XXXXXXXXX' (masalan, +998901234567)."
 )
+
 
 class User(AbstractUser, BaseModel):
     ROLE = (
@@ -39,7 +42,8 @@ class User(AbstractUser, BaseModel):
     email = models.EmailField(null=True, blank=True)
     phone = models.CharField(max_length=13, null=True, blank=True, validators=[phone_regex])
     photo = models.ImageField(upload_to='user_photos/', null=True, blank=True,
-                              validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'heic', 'heif'])])
+                              validators=[
+                                  FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'heic', 'heif'])])
     remember_me = models.BooleanField(default=False)
 
     def __str__(self):
@@ -65,7 +69,7 @@ class User(AbstractUser, BaseModel):
         if not self.username:
             temp_username = f'user-{uuid.uuid4().__str__().split("-")[-1]}'
             while User.objects.filter(username=temp_username).exists():
-                temp_username = f"{temp_username}{random.randint(0,9)}"
+                temp_username = f"{temp_username}{random.randint(0, 9)}"
             self.username = temp_username
 
     def check_email(self):
@@ -100,4 +104,3 @@ class User(AbstractUser, BaseModel):
 
     class Meta:
         app_label = "infrastructure"
-

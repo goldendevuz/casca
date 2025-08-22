@@ -1,11 +1,14 @@
+from adrf import viewsets
+from rest_framework import permissions, filters
+
 from api.permissions.system import NotificationPermission, NotificationSettingPermission, PaymentPermission
 from api.v1.serializers.system import NotificationSettingSerializer, PaymentSerializer
+from domain.entities.models.system import Notification, NotificationSetting, Payment
 from ..serializers import NotificationSerializer
-from rest_framework import permissions, filters
+
+
 # from django_filters.rest_framework import DjangoFilterBackend
 
-from domain.entities.models.system import Notification, NotificationSetting, Payment
-from adrf import viewsets
 
 class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
@@ -20,6 +23,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         # Agar kerak bo'lsa, qo'shimcha ma'lumotlar bilan saqlash mumkin
         serializer.save()
+
 
 class NotificationSettingViewSet(viewsets.ModelViewSet):
     queryset = NotificationSetting.objects.all()
@@ -36,6 +40,7 @@ class NotificationSettingViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class PaymentViewSet(viewsets.ModelViewSet):
     queryset = Payment.objects.all()

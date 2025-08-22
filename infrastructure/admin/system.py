@@ -2,20 +2,24 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from .shared import BaseAdmin
 from domain.entities.models.system import Notification, NotificationSetting, Payment
+from .shared import BaseAdmin
+
 
 class NotificationResource(resources.ModelResource):
     class Meta:
         model = Notification
 
+
 class NotificationSettingResource(resources.ModelResource):
     class Meta:
         model = NotificationSetting
 
+
 class PaymentResource(resources.ModelResource):
     class Meta:
         model = Payment
+
 
 @admin.register(Notification)
 class NotificationAdmin(ImportExportModelAdmin, BaseAdmin):
@@ -24,12 +28,14 @@ class NotificationAdmin(ImportExportModelAdmin, BaseAdmin):
     list_filter = ()
     search_fields = ('title', 'message')
 
+
 @admin.register(NotificationSetting)
 class NotificationSettingAdmin(ImportExportModelAdmin, BaseAdmin):
     resource_classes = [NotificationSettingResource]
     list_display = tuple(f.name for f in NotificationSetting._meta.fields if f.name not in ('id',))
     list_filter = ()
     search_fields = ('user__username',)
+
 
 @admin.register(Payment)
 class PaymentAdmin(ImportExportModelAdmin, BaseAdmin):

@@ -4,7 +4,6 @@ from config.settings.base import AUTH_USER_MODEL
 from domain.entities.models.shared import BaseModel
 
 
-
 class SecuritySetting(BaseModel):
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='security_settings')
     remember_me = models.BooleanField(default=False)

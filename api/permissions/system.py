@@ -1,15 +1,18 @@
 from rest_framework import permissions
 
+
 class IsOwnerOrAdmin(permissions.BasePermission):
     """
     Ob'ektga faqat egasi yoki admin kirishi mumkin.
     """
+
     def has_object_permission(self, request, view, obj):
         # Admin har doim kirishi mumkin
         if request.user.is_staff:
             return True
         # Ob'ektda user atributi borligini tekshirib, egasini solishtirish
         return hasattr(obj, 'user') and obj.user == request.user
+
 
 class NotificationPermission(permissions.BasePermission):
     """
@@ -18,6 +21,7 @@ class NotificationPermission(permissions.BasePermission):
     - Create: admin yoki system user (agar kerak bo'lsa).
     - Update va Delete: admin faqat ruxsat.
     """
+
     def has_permission(self, request, view):
         # Har doim login bo'lishi kerak
         if not request.user or not request.user.is_authenticated:
@@ -38,14 +42,17 @@ class NotificationPermission(permissions.BasePermission):
         # Agar user field bo'lmasa (Notification modelda yo'q bo'lsa), faqat adminga ruxsat beramiz
         return False
 
+
 class NotificationSettingPermission(permissions.BasePermission):
     """
     NotificationSetting uchun:
     - Foydalanuvchi faqat o'z sozlamalarini ko'rishi va o'zgartirishi mumkin.
     """
+
     def has_object_permission(self, request, view, obj):
         # Faqat o'z user'iga ruxsat
         return obj.user == request.user
+
 
 class PaymentPermission(permissions.BasePermission):
     """
@@ -54,6 +61,7 @@ class PaymentPermission(permissions.BasePermission):
     - Admin har qanday to'lovni boshqara oladi.
     - Review qilish faqat adminga yoki maxsus rolga.
     """
+
     def has_permission(self, request, view):
         if not request.user or not request.user.is_authenticated:
             return False

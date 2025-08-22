@@ -1,21 +1,23 @@
 from adrf.serializers import ModelSerializer
-from django.contrib.auth import get_user_model
-from django.db.models import Q
 from django.contrib.auth import authenticate
+from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import FileExtensionValidator
+from django.db.models import Q
+from rest_framework import serializers
+from rest_framework.exceptions import ValidationError, PermissionDenied, NotFound
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 
 from config.settings.base import AUTH_USER_MODEL
 from domain.entities.enums import CODE_VERIFIED, DONE, NEW, PHOTO_DONE, VIA_EMAIL, VIA_PHONE
 from domain.entities.models.user import UserConfirmation, Profile
 from infrastructure.services.tasks.user import process_user_photo
 from infrastructure.services.utility import check_user_type, check_username_phone_email, send_email, send_phone_code
-from rest_framework import serializers
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
-from rest_framework_simplejwt.tokens import RefreshToken, TokenError
-from rest_framework.exceptions import ValidationError, PermissionDenied, NotFound
 
 AUTH_USER_MODEL = get_user_model()
+
+
 class SignUpSerializer(ModelSerializer):
     username_phone_email = serializers.CharField(required=True, write_only=True)
 
@@ -77,12 +79,14 @@ class SignUpSerializer(ModelSerializer):
         # return value.lower()
         value = value.lower()
         # ic(value)
-        if value and AUTH_USER_MODEL.objects.filter(email=value, auth_status__in=[CODE_VERIFIED, DONE, PHOTO_DONE]).exists():
+        if value and AUTH_USER_MODEL.objects.filter(email=value,
+                                                    auth_status__in=[CODE_VERIFIED, DONE, PHOTO_DONE]).exists():
             data = {
                 "message": "Bu email allaqachon ma'lumotlar bazasida bor"
             }
             raise ValidationError(data)
-        elif value and AUTH_USER_MODEL.objects.filter(phone=value, auth_status__in=[CODE_VERIFIED, DONE, PHOTO_DONE]).exists():
+        elif value and AUTH_USER_MODEL.objects.filter(phone=value,
+                                                      auth_status__in=[CODE_VERIFIED, DONE, PHOTO_DONE]).exists():
             data = {
                 "message": "Bu telefon raqami allaqachon ma'lumotlar bazasida bor"
             }
@@ -97,6 +101,7 @@ class SignUpSerializer(ModelSerializer):
 
         return data
 
+
 class ChangeUserInformation(serializers.Serializer):
     first_name = serializers.CharField(write_only=True, required=True)
     last_name = serializers.CharField(write_only=True, required=True)
@@ -107,7 +112,7 @@ class ChangeUserInformation(serializers.Serializer):
     def validate(self, data):
         password = data.get('password', None)
         confirm_password = data.get('confirm_password', None)
-        if password !=confirm_password:
+        if password != confirm_password:
             raise ValidationError(
                 {
                     "message": "Parolingiz va tasdiqlash parolingiz bir-biriga teng emas"
@@ -147,6 +152,7 @@ class ChangeUserInformation(serializers.Serializer):
         instance.save()
         return instance
 
+
 class ChangeUserPhotoSerializer(serializers.Serializer):
     photo = serializers.ImageField(validators=[FileExtensionValidator(allowed_extensions=[
         'jpg', 'jpeg', 'png', 'heic', 'heif'
@@ -164,6 +170,7 @@ class ChangeUserPhotoSerializer(serializers.Serializer):
 
         return instance
 
+
 class LoginSerializer(TokenObtainPairSerializer):
 
     def __init__(self, *args, **kwargs):
@@ -176,7 +183,7 @@ class LoginSerializer(TokenObtainPairSerializer):
         if check_user_type(user_input) == 'username':
             username = user_input
         elif check_user_type(user_input) == "email":  # Anora@gmail.com   -> anOra@gmail.com
-            user = self.get_user(email__iexact=user_input) # user get method orqali user o'zgartiruvchiga biriktirildi
+            user = self.get_user(email__iexact=user_input)  # user get method orqali user o'zgartiruvchiga biriktirildi
             username = user.username
         elif check_user_type(user_input) == 'phone':
             user = self.get_user(phone=user_input)
@@ -243,6 +250,7 @@ class LoginSerializer(TokenObtainPairSerializer):
 
         return users.first()
 
+
 class LoginRefreshSerializer(TokenRefreshSerializer):
     def validate(self, attrs):
         try:
@@ -256,8 +264,10 @@ class LoginRefreshSerializer(TokenRefreshSerializer):
         }
         return data
 
+
 class LogoutSerializer(serializers.Serializer):
     refresh = serializers.CharField()
+
 
 class ResetPasswordSerializer(serializers.Serializer):
     username_phone_email = serializers.CharField(write_only=True, required=True)
@@ -275,6 +285,7 @@ class ResetPasswordSerializer(serializers.Serializer):
             raise NotFound(detail="User not found")
         attrs['user'] = user.first()
         return attrs
+
 
 class ForgetPasswordSerializer(serializers.Serializer):
     verify_type = serializers.ChoiceField(choices=['via_email', 'via_phone'])
@@ -311,6 +322,7 @@ class ForgetPasswordSerializer(serializers.Serializer):
         # Bu yerda kodni yuborish uchun email yoki sms jo'natish funksiyasini chaqirishingiz mumkin
 
         return {'message': 'Tasdiqlash kodi yuborildi.', 'code': code if True else 'hidden'}
+
 
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:

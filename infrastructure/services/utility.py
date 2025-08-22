@@ -1,11 +1,12 @@
 import re
 import threading
+
 import phonenumbers
+from decouple import config
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from icecream import ic
 from rest_framework.exceptions import ValidationError
-from decouple import config
 
 email_regex = re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b")
 phone_regex = re.compile(r"(\+[0-9]+\s*)?(\([0-9]+\))?[\s0-9\-]+[0-9]+")
@@ -17,9 +18,9 @@ username_regex = re.compile(r"^[a-zA-Z0-9_.-]+$")
 #     regex=r'^\+998\d{9}$',
 #     message="Telefon raqam quyidagi formatda bo'lishi kerak: '+998XXXXXXXXX' (masalan, +998901234567)."
 # )
-    # phone = phonenumbers.parse(username_phone_email)
-    # if phonenumbers.is_valid_number(phone):
-    #     username_phone_email = 'phone'
+# phone = phonenumbers.parse(username_phone_email)
+# if phonenumbers.is_valid_number(phone):
+#     username_phone_email = 'phone'
 
 def check_username_phone_email(username_phone_email):
     # ic(username_phone_email)
@@ -31,6 +32,7 @@ def check_username_phone_email(username_phone_email):
         "message": "Email yoki telefon raqamingiz notogri"
     }
     raise ValidationError(data)
+
 
 def check_user_type(user_input):
     # phone = phonenumbers.parse(user_input)
@@ -85,6 +87,7 @@ def send_email(email, code):
         }
     )
 
+
 def send_phone_code(phone, code):
     import requests
     import json
@@ -92,12 +95,12 @@ def send_phone_code(phone, code):
     url = "http://0.0.0.0:2020/api/sms/"
 
     payload = json.dumps({
-    "number": phone.replace("+998", ""),
-    "text": f"Salom do'stim! Sizning tasdiqlash kodingiz: {code}\n"
+        "number": phone.replace("+998", ""),
+        "text": f"Salom do'stim! Sizning tasdiqlash kodingiz: {code}\n"
     })
     headers = {
-    'Content-Type': 'application/json',
-    'Authorization': f'Basic {config("BASIC_AUTH_TOKEN")}',
+        'Content-Type': 'application/json',
+        'Authorization': f'Basic {config("BASIC_AUTH_TOKEN")}',
     }
 
     response = requests.request("POST", url, headers=headers, data=payload)

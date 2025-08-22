@@ -1,9 +1,10 @@
 from django.apps import AppConfig
 
+
 class InfrastructureConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "infrastructure"
 
     def ready(self):
-        import infrastructure.services.signals # noqa
-        import infrastructure.admin # noqa
+        import infrastructure.services.signals  # noqa
+        import infrastructure.admin  # noqa

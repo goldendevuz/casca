@@ -5,7 +5,6 @@ from domain.entities.models.shared import BaseModel
 from . import Barber
 
 
-
 class Favorite(BaseModel):
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='favorite_barbers')
     barber = models.ForeignKey(Barber, on_delete=models.CASCADE, related_name='favorited_by')
