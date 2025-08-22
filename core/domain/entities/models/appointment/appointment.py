@@ -6,12 +6,10 @@ from datetime import datetime
 from django.utils.timezone import make_aware
 
 from config.settings.base import AUTH_USER_MODEL
-from core.infrastructure.db.models.shared.base import BaseModel
-
 from .reason import Reason
-from .. import Barber, Service
-
-
+from ..barber import Barber
+from ..barbershop import Service
+from ..shared import BaseModel
 
 class Appointment(BaseModel):
     class Status(models.TextChoices):

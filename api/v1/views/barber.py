@@ -1,7 +1,7 @@
 from rest_framework import permissions
 
 from api.permissions.barber import IsOwnerOrAdmin
-from core.infrastructure.db.models import Barber, Favorite, History, SecuritySetting, WorkingHour
+from core.domain.entities.models.barber import Barber, Favorite, History, SecuritySetting, WorkingHour
 from ..serializers import (
     BarberSerializer,
     FavoriteSerializer,

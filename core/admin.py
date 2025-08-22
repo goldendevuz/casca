@@ -3,7 +3,11 @@ from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
-from core.infrastructure.db.models import *
+from core.domain.entities.models.appointment import *
+from core.domain.entities.models.barber import *
+from core.domain.entities.models.barbershop import *
+from core.domain.entities.models.system import *
+from core.domain.entities.models.user import *
 
 class BaseAdmin(admin.ModelAdmin):
     list_per_page = 10

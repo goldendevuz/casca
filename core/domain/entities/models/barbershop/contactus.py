@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import models
 
-from core.infrastructure.db.models.shared.base import BaseModel
+from core.domain.entities.models.shared import BaseModel
 
 
 

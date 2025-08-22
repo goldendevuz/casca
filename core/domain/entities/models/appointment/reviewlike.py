@@ -2,11 +2,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from config.settings.base import AUTH_USER_MODEL
-from core.infrastructure.db.models.appointment.review import Review
-from core.infrastructure.db.models.shared.base import BaseModel
-
-
-
+from .review import Review
+from ..shared import BaseModel
 
 class ReviewLike(BaseModel):
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='liked_reviews')

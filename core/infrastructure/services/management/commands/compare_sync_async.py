@@ -2,7 +2,7 @@ import time
 import asyncio
 from django.core.management.base import BaseCommand
 
-from core.infrastructure.db.models.user.user import User
+from core.domain.entities.models.user import User
 REPEAT_COUNT = 100_000
 STEP = 10_000
 

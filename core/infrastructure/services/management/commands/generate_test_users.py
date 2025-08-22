@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.utils.crypto import get_random_string
 
-from core.infrastructure.db.models.user.user import NEW, PATIENT, VIA_PHONE, User
+from core.domain.entities.enums import NEW, PATIENT, VIA_PHONE, User
 
 class Command(BaseCommand):
     help = 'Generate 100 test users'

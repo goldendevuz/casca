@@ -2,9 +2,8 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.utils.timezone import now
 
-from core.infrastructure.db.models import NotificationSetting, Payment
-from core.infrastructure.db.models import Notification
-from core.infrastructure.db.models.user.user import User
+from core.domain.entities.models.system import Notification, NotificationSetting, Payment
+from core.domain.entities.models.user import User
 from core.infrastructure.services.tasks.system import send_notification
 
 @receiver(post_save, sender=User)

@@ -1,7 +1,7 @@
 import logging
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from core.infrastructure.db.models import Barbershop, Service
+from core.domain.entities.models.barbershop import Barbershop, Service
 
 logger = logging.getLogger(__name__)
 

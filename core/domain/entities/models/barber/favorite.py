@@ -1,7 +1,7 @@
 from django.db import models
 
 from config.settings.base import AUTH_USER_MODEL
-from core.infrastructure.db.models.shared.base import BaseModel
+from core.domain.entities.models.shared import BaseModel
 from . import Barber
 
 

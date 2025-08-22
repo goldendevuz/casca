@@ -2,7 +2,7 @@ from adrf.serializers import ModelSerializer
 from django.utils import timezone
 from rest_framework import serializers
 
-from core.infrastructure.db.models import (
+from core.domain.entities.models.system import (
     Notification,
     NotificationSetting,
     Payment,

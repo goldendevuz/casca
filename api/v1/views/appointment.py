@@ -3,7 +3,7 @@ from api.permissions import IsAppointmentOwnerOrBarberOrAdmin
 from rest_framework import permissions
 from adrf import viewsets
 
-from core.infrastructure.db.models import Appointment, Reason, Review, Rate, ReviewLike
+from core.domain.entities.models.appointment import Appointment, Reason, Review, Rate, ReviewLike
 from ..serializers import (
     AppointmentSerializer, ReasonSerializer,
     ReviewSerializer, RateSerializer, ReviewLikeSerializer

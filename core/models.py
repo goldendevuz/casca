@@ -1,4 +1,4 @@
-# This file makes Django aware of the CustomUser model defined deeper in infrastructure.
-from core.infrastructure.db.models import User
+# This file makes Django aware of the User model defined deeper in infrastructure.
+from core.domain.entities.models.user import User
 
 __all__ = ["User"]

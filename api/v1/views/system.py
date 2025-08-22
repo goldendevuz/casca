@@ -4,7 +4,7 @@ from ..serializers import NotificationSerializer
 from rest_framework import permissions, filters
 # from django_filters.rest_framework import DjangoFilterBackend
 
-from core.infrastructure.db.models import Notification, NotificationSetting, Payment
+from core.domain.entities.models.system import Notification, NotificationSetting, Payment
 from adrf import viewsets
 
 class NotificationViewSet(viewsets.ModelViewSet):

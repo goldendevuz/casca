@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.password_validation import validate_password
 from django.core.validators import FileExtensionValidator
 from config.settings.base import AUTH_USER_MODEL
-from core.infrastructure.db.models.user.user import CODE_VERIFIED, DONE, NEW, PHOTO_DONE, VIA_EMAIL, VIA_PHONE
+from core.domain.entities.enums import CODE_VERIFIED, DONE, NEW, PHOTO_DONE, VIA_EMAIL, VIA_PHONE
 from core.infrastructure.services.tasks.user import process_user_photo
 from core.infrastructure.services.utility import check_user_type, check_username_phone_email, send_email, send_phone_code
 from rest_framework import serializers
@@ -13,8 +13,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, Toke
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from rest_framework.exceptions import ValidationError, PermissionDenied, NotFound
 
-from core.infrastructure.db.models import UserConfirmation, Profile
-# VIA_EMAIL, VIA_PHONE, NEW, CODE_VERIFIED, DONE, PHOTO_DONE
+from core.domain.entities.models.user import UserConfirmation, Profile
 
 AUTH_USER_MODEL = get_user_model()
 class SignUpSerializer(ModelSerializer):

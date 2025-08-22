@@ -1,6 +1,6 @@
 from celery import shared_task
 from django.utils import timezone
-from core.infrastructure.db.models import Notification
+from core.domain.entities.models.system import Notification
 
 @shared_task
 def send_notification(notification_id):

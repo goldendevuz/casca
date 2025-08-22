@@ -3,8 +3,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 from config.settings.base import AUTH_USER_MODEL
-from core.infrastructure.db.models.appointment.appointment import Appointment
-from core.infrastructure.db.models.shared.base import BaseModel
+from core.domain.entities.models.appointment import Appointment
+from core.domain.entities.models.shared import BaseModel
 
 
 

@@ -2,11 +2,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 from config.settings.base import AUTH_USER_MODEL
-from core.infrastructure.db.models.barbershop.barbershop import Barbershop
-from core.infrastructure.db.models.barbershop.specialty import Specialty
-from core.infrastructure.db.models.shared.base import BaseModel
-
-
+from core.domain.entities.models.shared import BaseModel
+from core.domain.entities.models.barbershop import Barbershop, Specialty
 
 class Barber(BaseModel):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='barber_profile')

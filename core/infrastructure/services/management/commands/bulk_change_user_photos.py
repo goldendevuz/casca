@@ -3,7 +3,7 @@ from io import BytesIO
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management.base import BaseCommand
 
-from core.infrastructure.db.models.user.user import User
+from core.domain.entities.models.user import User
 from core.infrastructure.services.tasks.user import process_user_photo
 
 PHOTO_DONE = 'photo_done'

@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from core.infrastructure.db.models import Barber, History, WorkingHour, SecuritySetting
+from core.domain.entities.models.barber import Barber, History, WorkingHour, SecuritySetting
 
 @receiver(post_save, sender=Barber)
 def create_barber_related_data(sender, instance, created, **kwargs):
