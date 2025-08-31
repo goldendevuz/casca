@@ -1,0 +1,48 @@
+# ─── Core ───────────────────────────────────────────────
+Django
+djangorestframework
+django-filter
+psycopg2-binary
+python-decouple
+pillow
+
+# ─── Authentication / Security ──────────────────────────
+djangorestframework-simplejwt
+django-ratelimit
+cryptography
+
+# ─── API Docs / Schema / Errors ─────────────────────────
+drf-spectacular[sidecar]
+drf-standardized-errors
+django-schema-viewer
+djangorestframework-jsonapi[django-filter]
+
+# ─── Internationalization / Translations ────────────────
+django-parler
+django-parler-rest
+django-modeltranslation
+django-rosetta
+
+# ─── Messaging / Async / Real-time ──────────────────────
+adrf
+
+# ─── Task Queue / Scheduling ────────────────────────────
+celery[redis,rabbitmq]
+flower
+django-celery-beat
+django-celery-results
+
+# ─── Admin / Import / Export / Debug ────────────────────
+django-import-export[all]
+django-debug-toolbar
+django-daisy  # UI helper
+django-redis  # caching backend
+redis  # caching backend
+Faker         # test data generation
+icecream      # debugging helper
+
+# ─── Deployment / ASGI / WSGI ───────────────────────────
+uvicorn[standard]
+gunicorn
+whitenoise
+django-cors-headers
