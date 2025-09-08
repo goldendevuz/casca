@@ -7,7 +7,7 @@ from apps.v1.shared.enums import PaymentStatuses
 
 class Payment(BaseModel):
     profile = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="payments",
         verbose_name=_("Profile"),
@@ -31,7 +31,7 @@ class Payment(BaseModel):
         help_text=_("Timestamp when the payment was made"),
     )
     reviewed_by = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="payments_reviewed",
         verbose_name=_("Reviewed By"),

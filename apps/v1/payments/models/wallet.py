@@ -5,7 +5,7 @@ from apps.v1.shared.models import BaseModel
 
 class Wallet(BaseModel):
     profile = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="wallets",
         verbose_name=_("Profile"),

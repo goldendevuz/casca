@@ -56,10 +56,14 @@ THIRD_APPS = {
 }
 
 LOCAL_APPS = [
-    # 'apps.v1.shared',
-    # 'apps.v1.users',
-    # 'apps.v1.finances',
-    # 'apps.v1.communications',
+    'apps.v1.shared',
+    'apps.v1.accounts',
+    'apps.v1.barbershops',
+    'apps.v1.content',
+    'apps.v1.messaging',
+    'apps.v1.notifications',
+    'apps.v1.payments',
+    'apps.v1.settings',
 ]
 
 INSTALLED_APPS += THIRD_APPS
@@ -181,9 +185,9 @@ REST_FRAMEWORK = {
     ),
     'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json',
     'DEFAULT_PERMISSION_CLASSES': [
-        # "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.IsAuthenticated",
         # "rest_framework.permissions.AllowAny",
-        "apps.v1.shared.permissions.HasCompletedSignup",
+        # "apps.v1.shared.permissions.HasCompletedSignup",
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.SessionAuthentication',
@@ -299,7 +303,7 @@ SPECTACULAR_SETTINGS = {
     'SCHEMA_PATH_PREFIX': r'/api/v[0-9]/',  # Example: /api/v1/users will get 'users' tag
 }
 
-# AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "accounts.User"
 
 LANGUAGE_CODE = 'en-us'
 

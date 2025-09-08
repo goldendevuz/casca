@@ -3,4 +3,5 @@ from django.apps import AppConfig
 
 class MessagingConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'messaging'
+    name = 'apps.v1.messaging'
+    label = 'messaging'

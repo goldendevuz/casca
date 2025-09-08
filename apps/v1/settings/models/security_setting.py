@@ -5,7 +5,7 @@ from apps.v1.shared.models import BaseModel
 
 class SecuritySetting(BaseModel):
     profile = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="security_settings",
         verbose_name=_("Profile"),

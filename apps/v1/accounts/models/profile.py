@@ -6,7 +6,7 @@ from apps.v1.shared.enums import Themes, Genders, UserRoles
 
 class Profile(BaseModel):
     user = models.OneToOneField(
-        "users.User",
+        "accounts.User",
         on_delete=models.CASCADE,
         related_name="profile",
         verbose_name=_("User"),
@@ -32,7 +32,7 @@ class Profile(BaseModel):
         help_text=_("The theme preference for the app"),
     )
     app_language = models.ForeignKey(
-        "languages.Language",
+        "content.Language",
         on_delete=models.SET_NULL,
         blank=True,
         null=True,

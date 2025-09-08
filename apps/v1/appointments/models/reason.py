@@ -6,7 +6,7 @@ from apps.v1.shared.models import BaseModel
 
 class Reason(BaseModel):
     profile = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="reasons",
         verbose_name=_("Profile"),

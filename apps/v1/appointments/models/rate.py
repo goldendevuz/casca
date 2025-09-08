@@ -5,7 +5,7 @@ from apps.v1.shared.models import BaseModel
 
 class Rate(BaseModel):
     profile = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="rates",
         verbose_name=_("Profile"),

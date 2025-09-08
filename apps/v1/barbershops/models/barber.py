@@ -5,7 +5,7 @@ from apps.v1.shared.models import BaseModel
 
 class Barber(BaseModel):
     user = models.ForeignKey(
-        "users.User",
+        "accounts.User",
         on_delete=models.CASCADE,
         related_name="barber_profile",
         verbose_name=_("User"),

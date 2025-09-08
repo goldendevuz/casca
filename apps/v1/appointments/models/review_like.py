@@ -5,7 +5,7 @@ from apps.v1.shared.models import BaseModel
 
 class ReviewLike(BaseModel):
     profile = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="review_likes",
         verbose_name=_("Profile"),

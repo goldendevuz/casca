@@ -21,7 +21,7 @@ urlpatterns = [
     path(API_V1_URL + 'api-auth/', include('rest_framework.urls')),
 
     # Your app endpoints
-    path(API_V1_URL + 'users/', include('apps.v1.users.urls')),
+    # path(API_V1_URL + 'users/', include('apps.v1.accounts.urls')),
     # path(API_V1_URL + 'communications/', include('apps.v1.communications.urls')),
 ]
 

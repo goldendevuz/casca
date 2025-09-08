@@ -5,7 +5,7 @@ from apps.v1.shared.models import BaseModel
 
 class NotificationSetting(BaseModel):
     profile = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="notification_settings",
         verbose_name=_("Profile"),

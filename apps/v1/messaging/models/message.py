@@ -5,14 +5,14 @@ from apps.v1.shared.models import BaseModel
 
 class Message(BaseModel):
     owner = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="sent_messages",
         verbose_name=_("Owner"),
         help_text=_("The profile that sent the message"),
     )
     receiver = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="received_messages",
         verbose_name=_("Receiver"),
@@ -25,7 +25,7 @@ class Message(BaseModel):
         help_text=_("The text content of the message"),
     )
     voice = models.ForeignKey(
-        "voices.Voice",
+        "messaging.Voice",
         on_delete=models.SET_NULL,
         blank=True,
         null=True,

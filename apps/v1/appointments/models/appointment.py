@@ -11,14 +11,14 @@ class SeatCount(models.TextChoices):
 
 class Appointment(BaseModel):
     customer = models.ForeignKey(
-        "users.Profile",
+        "accounts.Profile",
         on_delete=models.CASCADE,
         related_name="appointments",
         verbose_name=_("Customer"),
         help_text=_("The profile of the customer"),
     )
     barber = models.ForeignKey(
-        "barbers.Barber",
+        "barbershops.Barber",
         on_delete=models.CASCADE,
         related_name="appointments",
         verbose_name=_("Barber"),
