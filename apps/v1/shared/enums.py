@@ -1,104 +1,100 @@
 from django.db import models
-from django.utils.translation import gettext_lazy as _
 
 
-# --- Auth status ---
-class AuthStatus(models.TextChoices):
-    NEW = "new", _("New")
-    CODE_VERIFIED = "code_verified", _("Code Verified")
-    DONE = "done", _("Done")
+class DiscountTypes(models.TextChoices):
+    PERCENT = "percent", "Percent"
+    AMOUNT = "amount", "Amount"
+
+    def __str__(self):
+        return self.label
 
 
-# --- Verification type ---
-class AuthType(models.TextChoices):
-    VIA_PHONE = "via_phone", _("Via Phone")
-    VIA_EMAIL = "via_email", _("Via Email")
-
-
-# --- Notification ---
 class NotificationStates(models.TextChoices):
-    NEW = "new", _("New")
-    READ = "read", _("Read")
+    NEW = "new", "New"
+    READ = "read", "Read"
+
+    def __str__(self):
+        return self.label
 
 
-# --- Theme ---
-class ThemeChoices(models.TextChoices):
-    SYSTEM = "system", _("System")
-    LIGHT = "light", _("Light")
-    DARK = "dark", _("Dark")
+class UserRoles(models.TextChoices):
+    ORDINARY_USER = "ordinary_user", "Ordinary User"
+    CUSTOMER = "customer", "Customer"
+    BARBER = "barber", "Barber"
+    MANAGER = "manager", "Manager"
+    ADMIN = "admin", "Admin"
+    SUPER_ADMIN = "super_admin", "Super Admin"
+
+    def __str__(self):
+        return self.label
 
 
-# --- Gender ---
-class GenderChoices(models.TextChoices):
-    MALE = "male", _("Male")
-    FEMALE = "female", _("Female")
+class Genders(models.TextChoices):
+    MALE = "male", "Male"
+    FEMALE = "female", "Female"
+
+    def __str__(self):
+        return self.label
 
 
-# --- Role ---
-class RoleChoices(models.TextChoices):
-    PASSENGER = "passenger", _("Passenger")
-    CUSTOMER = "customer", _("Customer")
-    DRIVER = "driver", _("Driver")
-    MANAGER = "manager", _("Manager")
-    ADMIN = "admin", _("Admin")
-    SUPER_ADMIN = "super_admin", _("Super Admin")
+class AuthStatuses(models.TextChoices):
+    NEW = "new", "New"
+    CODE_VERIFIED = "code_verified", "Code Verified"
+    DONE = "done", "Done"
+
+    def __str__(self):
+        return self.label
 
 
-# --- Expiry times ---
-PHONE_EXPIRE = 2  # minutes
-EMAIL_EXPIRE = 2  # minutes
+class AuthTypes(models.TextChoices):
+    VIA_PHONE = "via_phone", "Via Phone"
+    VIA_EMAIL = "via_email", "Via Email"
+
+    def __str__(self):
+        return self.label
 
 
-# --- Payment Status ---
+class Themes(models.TextChoices):
+    SYSTEM = "system", "System"
+    LIGHT = "light", "Light"
+    DARK = "dark", "Dark"
+
+    def __str__(self):
+        return self.label
+
+
 class PaymentStatuses(models.TextChoices):
-    PENDING = "pending", _("Pending")
-    PAID = "paid", _("Paid")
-    FAILED = "failed", _("Failed")
-    REFUNDED = "refunded", _("Refunded")
+    PENDING = "pending", "Pending"
+    PAID = "paid", "Paid"
+    FAILED = "failed", "Failed"
+    REFUNDED = "refunded", "Refunded"
 
-class DiscountType(models.TextChoices):
-    PERCENT = 'percent', _('Percent')
-    AMOUNT = 'amount', _('Amount')
+    def __str__(self):
+        return self.label
 
-class FAQCategories(models.TextChoices):
-    GENERAL = 'general', _('General')
-    ACCOUNT = 'account', _('Account')
-    SERVICES = 'services', _('Services')
-    RIDE = 'ride', _('Ride')
 
-# --- Seats Count ---
-class SeatsCountChoices(models.TextChoices):
-    ONE_SEAT = "one_seat", _("One Seat")
-    TWO_SEATS = "two_seats", _("Two Seats")
-    FULL = "full", _("Full")
-
-# --- Promo Information Type ---
-class PromoInformationType(models.TextChoices):
-    TERMS_AND_CONDITIONS = "terms_and_conditions", _("Terms and Conditions")
-    HOW_TO_USE = "how_to_use", _("How to Use")
-    ADDITIONAL_INFORMATION = "additional_information", _("Additional Information")
-
-# --- Appointment Status ---
 class AppointmentStatuses(models.TextChoices):
-    PENDING = "pending", _("Pending")
-    SCHEDULED = "scheduled", _("Scheduled")
-    CANCELED = "canceled", _("Canceled")
-    RESCHEDULED = "rescheduled", _("Rescheduled")
-    APPROVED = "approved", _("Approved")
-    ONGOING = "ongoing", _("Ongoing")
-    COMPLETED = "completed", _("Completed")
-    REFUNDED = "refunded", _("Refunded")
+    PENDING = "pending", "Pending"
+    SCHEDULED = "scheduled", "Scheduled"
+    CANCELED = "canceled", "Canceled"
+    RESCHEDULED = "rescheduled", "Rescheduled"
+    APPROVED = "approved", "Approved"
+    ONGOING = "ongoing", "Ongoing"
+    COMPLETED = "completed", "Completed"
+    REFUNDED = "refunded", "Refunded"
 
-# --- Reason Type ---
+    def __str__(self):
+        return self.label
+
+
 class ReasonTypes(models.TextChoices):
-    CHANGE_IN_PLANS = "change_in_plans", _("Change in Plans")
-    WAITING_FOR_LONG_TIME = "waiting_for_long_time", _("Waiting for Long Time")
-    UNABLE_TO_CONTACT_DRIVER = "unable_to_contact_driver", _("Unable to Contact Driver")
-    DRIVER_DENIED_TO_GO_TO_DESTINATION = "driver_denied_to_go_to_destination", _("Driver Denied to Go to Destination")
-    DRIVER_DENIED_TO_GO_TO_PICKUP = "driver_denied_to_go_to_pickup", _("Driver Denied to Go to Pickup")
-    WRONG_ADDRESS_SHOWN = "wrong_address_shown", _("Wrong Address Shown")
-    THIS_PRICE_IS_NOT_REASONABLE = "this_price_is_not_reasonable", _("This Price is Not Reasonable")
-    EMERGENCY_SITUATION = "emergency_sitation", _("Emergency Situation")
-    BOOKING_MISTAKE = "booking_mistake", _("Booking Mistake")
-    POOR_WEATHER_CONDITIONS = "poor_weather_conditions", _("Poor Weather Conditions")
-    OTHER = "other", _("Other")
+    CHANGE_IN_PLANS = "change_in_plans", "Change in Plans"
+    UNABLE_TO_CONTACT_BARBER = "unable_to_contact_barber", "Unable to Contact Barber"
+    WRONG_ADDRESS_SHOWN = "wrong_address_shown", "Wrong Address Shown"
+    THIS_PRICE_IS_NOT_REASONABLE = "this_price_is_not_reasonable", "This Price is Not Reasonable"
+    BOOKING_MISTAKE = "booking_mistake", "Booking Mistake"
+    POOR_WEATHER_CONDITIONS = "poor_weather_conditions", "Poor Weather Conditions"
+    OTHER = "other", "Other"
+
+    def __str__(self):
+        return self.label

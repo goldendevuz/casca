@@ -13,7 +13,7 @@ cryptography
 
 # ─── API Docs / Schema / Errors ─────────────────────────
 drf-spectacular[sidecar]
-drf-standardized-errors
+drf-standardized-errors[openapi]
 django-schema-viewer
 djangorestframework-jsonapi[django-filter]
 

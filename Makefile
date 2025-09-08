@@ -44,9 +44,9 @@ re-mig:
 run-wsgi:
 	gunicorn core.wsgi:application --bind 0.0.0.0:1026
 tunnel:
-	jprq http 1026 -s goride-api
+	jprq http 1026 -s casca-api
 open-bash:
-	sudo docker exec -it goride_api bash
+	sudo docker exec -it casca_api bash
 down:
 	sudo docker compose down -v
 up:
@@ -54,6 +54,6 @@ up:
 logs:
 	sudo docker compose logs
 restart:
-	sudo docker rm -f goride_api goride_nginx goride_redis & make down & make up
+	sudo docker rm -f casca_api casca_nginx casca_redis & make down & make up
 seed_languages:
 	python manage.py seed_languages

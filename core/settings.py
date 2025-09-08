@@ -3,11 +3,10 @@ import os
 from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
-from django.utils import translation
 
 from .envs import (DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER, SECRET_KEY, DEBUG, ALLOWED_HOSTS,
                    CSRF_TRUSTED_ORIGINS, CORS_ALLOWED_ORIGINS,
-                   EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME, REDIS_URL, CELERY_BROKER_URL, CELERY_RESULT_BACKEND)
+                   EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, ACCESS_TOKEN_LIFETIME, REFRESH_TOKEN_LIFETIME, REDIS_URL, CELERY_BROKER_URL, CELERY_RESULT_BACKEND, TIME_ZONE)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,28 +56,28 @@ THIRD_APPS = {
 }
 
 LOCAL_APPS = [
-    'apps.v1.shared',
-    'apps.v1.users',
-    'apps.v1.rides',
-    'apps.v1.finances',
-    'apps.v1.communications',
+    # 'apps.v1.shared',
+    # 'apps.v1.users',
+    # 'apps.v1.finances',
+    # 'apps.v1.communications',
 ]
 
 INSTALLED_APPS += THIRD_APPS
 INSTALLED_APPS += LOCAL_APPS
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.locale.LocaleMiddleware',             
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.middleware.locale.LocaleMiddleware",          # handles guests (Accept-Language, session, cookie)
+    "apps.v1.shared.middleware.UserLanguageMiddleware",   # overrides if user has profile.app_language
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 
@@ -148,7 +147,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-TIME_ZONE = 'Asia/Tashkent'
+TIME_ZONE = TIME_ZONE
 
 USE_I18N = True
 
@@ -165,11 +164,6 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
     'DEFAULT_PAGINATION_CLASS':
         'rest_framework_json_api.pagination.JsonApiPageNumberPagination',
-    'DEFAULT_PARSER_CLASSES': (
-        'rest_framework_json_api.parsers.JSONParser',
-        'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser'
-    ),
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework_json_api.renderers.JSONRenderer',
         'rest_framework_json_api.renderers.BrowsableAPIRenderer',
@@ -187,9 +181,9 @@ REST_FRAMEWORK = {
     ),
     'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json',
     'DEFAULT_PERMISSION_CLASSES': [
+        # "rest_framework.permissions.IsAuthenticated",
         # "rest_framework.permissions.AllowAny",
-        "rest_framework.permissions.IsAuthenticated",
-        # "apps.v1.shared.permissions.HasCompletedSignup",
+        "apps.v1.shared.permissions.HasCompletedSignup",
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.SessionAuthentication',
@@ -197,21 +191,12 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.JSONParser',
+        'rest_framework_json_api.parsers.JSONParser',
         'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser',  # Needed for file uploads
+        'rest_framework.parsers.MultiPartParser'
     ),
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-    ),
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend',
-        'rest_framework.filters.SearchFilter',
-        'rest_framework.filters.OrderingFilter',
-    ],
     "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-
+    "DEFAULT_SCHEMA_CLASS": "drf_standardized_errors.openapi.AutoSchema",
 }
 
 SIMPLE_JWT = {
@@ -260,10 +245,11 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# if DEBUG:
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# else:
+    
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 STORAGES = {
     "staticfiles": {
@@ -313,7 +299,7 @@ SPECTACULAR_SETTINGS = {
     'SCHEMA_PATH_PREFIX': r'/api/v[0-9]/',  # Example: /api/v1/users will get 'users' tag
 }
 
-AUTH_USER_MODEL = "users.User"
+# AUTH_USER_MODEL = "users.User"
 
 LANGUAGE_CODE = 'en-us'
 
