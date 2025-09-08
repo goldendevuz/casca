@@ -1,26 +1,20 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from apps.v1.shared.enums import AppointmentStatuses
+from apps.v1.shared.enums import AppointmentStatuses, SeatCount
 from apps.v1.shared.models import BaseModel
-
-
-class SeatCount(models.TextChoices):
-    ONE_SEAT = "one_seat", _("One Seat")
-    TWO_SEATS = "two_seats", _("Two Seats")
-    MULTIPLE = "multiple", _("Multiple Seats")
 
 
 class Appointment(BaseModel):
     customer = models.ForeignKey(
-        "accounts.Profile",
+        to="accounts.Profile",
         on_delete=models.CASCADE,
         related_name="appointments",
         verbose_name=_("Customer"),
         help_text=_("The profile of the customer"),
     )
     barber = models.ForeignKey(
-        "barbershops.Barber",
+        to="barbershops.Barber",
         on_delete=models.CASCADE,
         related_name="appointments",
         verbose_name=_("Barber"),
@@ -34,7 +28,7 @@ class Appointment(BaseModel):
         help_text=_("The number of seats reserved for the appointment"),
     )
     payment = models.ForeignKey(
-        "payments.Payment",
+        to="payments.Payment",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -43,7 +37,7 @@ class Appointment(BaseModel):
         help_text=_("The payment associated with the appointment"),
     )
     promotion = models.ForeignKey(
-        "promotions.Promotion",
+        to="payments.Promotion",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -63,7 +57,7 @@ class Appointment(BaseModel):
         help_text=_("The status of the appointment"),
     )
     mood_during_appointment = models.ForeignKey(
-        "moods.Mood",
+        to="appointments.Mood",
         on_delete=models.CASCADE,
         related_name="appointments",
         verbose_name=_("Mood During Appointment"),
@@ -78,7 +72,7 @@ class Appointment(BaseModel):
         help_text=_("The time of the appointment"),
     )
     barbershop = models.ForeignKey(
-        "barbershops.Barbershop",
+        to="barbershops.Barbershop",
         on_delete=models.CASCADE,
         related_name="appointments",
         verbose_name=_("Barbershop"),

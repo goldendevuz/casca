@@ -9,7 +9,7 @@ from apps.v1.shared.models import BaseModel
 
 class UserNotification(BaseModel, TranslatableModel):
     profile = models.ForeignKey(
-        "accounts.Profile",
+        to="accounts.Profile",
         on_delete=models.CASCADE,
         related_name="user_notifications",
         verbose_name=_("Profile"),

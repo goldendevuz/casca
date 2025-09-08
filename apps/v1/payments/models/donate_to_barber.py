@@ -5,14 +5,14 @@ from apps.v1.shared.models import BaseModel
 
 class DonateToBarber(BaseModel):
     profile = models.ForeignKey(
-        "accounts.Profile",
+        to="accounts.Profile",
         on_delete=models.CASCADE,
         related_name="donations",
         verbose_name=_("Profile"),
         help_text=_("The profile that made the donation"),
     )
     barber = models.ForeignKey(
-        "barbershops.Barber",
+        to="barbershops.Barber",
         on_delete=models.CASCADE,
         related_name="donations",
         verbose_name=_("Barber"),
@@ -23,7 +23,7 @@ class DonateToBarber(BaseModel):
         help_text=_("The amount donated"),
     )
     payment = models.ForeignKey(
-        "payments.Payment",
+        to="payments.Payment",
         on_delete=models.CASCADE,
         related_name="donations",
         verbose_name=_("Payment"),

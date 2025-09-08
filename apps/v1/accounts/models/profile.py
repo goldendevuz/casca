@@ -32,7 +32,7 @@ class Profile(BaseModel):
         help_text=_("The theme preference for the app"),
     )
     app_language = models.ForeignKey(
-        "content.Language",
+        to="content.Language",
         on_delete=models.SET_NULL,
         blank=True,
         null=True,

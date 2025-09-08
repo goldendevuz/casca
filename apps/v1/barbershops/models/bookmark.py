@@ -5,14 +5,14 @@ from apps.v1.shared.models import BaseModel
 
 class Bookmark(BaseModel):
     profile = models.ForeignKey(
-        "accounts.Profile",
+        to="accounts.Profile",
         on_delete=models.CASCADE,
         related_name="bookmarks",
         verbose_name=_("Profile"),
         help_text=_("The profile that created the bookmark"),
     )
     barbershop = models.ForeignKey(
-        "barbershops.Barbershop",
+        to="barbershops.Barbershop",
         on_delete=models.CASCADE,
         related_name="bookmarks",
         verbose_name=_("Barbershop"),

@@ -5,14 +5,14 @@ from apps.v1.shared.models import BaseModel
 
 class Review(BaseModel):
     profile = models.ForeignKey(
-        "accounts.Profile",
+        to="accounts.Profile",
         on_delete=models.CASCADE,
         related_name="reviews",
         verbose_name=_("Profile"),
         help_text=_("The profile that wrote the review"),
     )
     appointment = models.ForeignKey(
-        "appointments.Appointment",
+        to="appointments.Appointment",
         on_delete=models.CASCADE,
         related_name="reviews",
         verbose_name=_("Appointment"),

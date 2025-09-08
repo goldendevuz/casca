@@ -5,14 +5,14 @@ from apps.v1.shared.models import BaseModel
 
 class Barber(BaseModel):
     user = models.ForeignKey(
-        "accounts.User",
+        to="accounts.User",
         on_delete=models.CASCADE,
         related_name="barber_profile",
         verbose_name=_("User"),
         help_text=_("The user account for the barber"),
     )
     barbershop = models.ForeignKey(
-        "barbershops.Barbershop",
+        to="barbershops.Barbershop",
         on_delete=models.CASCADE,
         related_name="barbers",
         verbose_name=_("Barbershop"),

@@ -16,7 +16,7 @@ class Package(BaseModel, TranslatableModel):
         help_text=_("The image representing the package"),
     )
     service = models.ForeignKey(
-        "barbershops.Service",
+        to="barbershops.Service",
         on_delete=models.CASCADE,
         related_name="packages",
         verbose_name=_("Service"),

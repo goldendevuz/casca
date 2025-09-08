@@ -6,14 +6,14 @@ from apps.v1.shared.models import BaseModel
 
 class Barbershop(BaseModel, TranslatableModel):
     owner = models.ForeignKey(
-        "accounts.Profile",
+        to="accounts.Profile",
         on_delete=models.CASCADE,
         related_name="barbershops",
         verbose_name=_("Owner"),
         help_text=_("The profile that owns the barbershop"),
     )
     address = models.ForeignKey(
-        "shared.Address",
+        to="shared.Address",
         on_delete=models.CASCADE,
         related_name="barbershops",
         verbose_name=_("Address"),

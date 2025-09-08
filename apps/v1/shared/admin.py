@@ -3,27 +3,20 @@ from django.utils.html import format_html
 from django.db import models as dj_models
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from parler.admin import TranslatableAdmin
 
-from .models import (
-    Address,
-)
+from .models import Address
 
 
-# Helper function to get translatable fields
-def get_translatable_fields(model):
-    """
-    Returns a list of field names that are translatable.
-    """
-    if hasattr(model, 'translations'):
-        return [f.name for f in model.translations.fields]
-    return []
+class BaseAdmin(admin.ModelAdmin):
+    list_per_page = 10
+
+    class Meta:
+        abstract = True
 
 
 def register_model(model):
     """
-    Dynamically registers a model with the Django admin,
-    handling both Translatable and non-Translatable models.
+    Dynamically registers a model with the Django admin.
     """
     # Create dynamic resource class for import/export
     resource_class = type(
@@ -32,35 +25,24 @@ def register_model(model):
         {"Meta": type("Meta", (), {"model": model})}
     )
 
-    # Determine admin base classes
-    is_translatable = hasattr(model, 'translations')
-    base_classes = (ImportExportModelAdmin, BaseAdmin)
-    if is_translatable:
-        base_classes = (TranslatableAdmin,) + base_classes
-
-    # Get non-translatable and translatable fields
-    translatable_fields = get_translatable_fields(model)
-    non_translatable_fields = [
-        f.name for f in model._meta.fields
-        if f.name not in translatable_fields
-    ]
+    # Get model fields
+    non_translatable_fields = [f.name for f in model._meta.fields]
 
     # Base admin attributes
     admin_attrs = {
         "resource_classes": [resource_class],
-        "list_display": list(non_translatable_fields) + translatable_fields,
+        "list_display": list(non_translatable_fields),
         "list_filter": list(non_translatable_fields),
         "search_fields": list(non_translatable_fields),
     }
 
-    # Add Parler-specific search fields
-    if is_translatable:
-        for field in translatable_fields:
-            admin_attrs["search_fields"].append(f"{field}")
-
     # Add custom display methods for text and image fields
-    image_fields = [f.name for f in model._meta.fields if isinstance(f, dj_models.ImageField)]
-    text_fields = [f.name for f in model._meta.fields if isinstance(f, dj_models.TextField)]
+    image_fields = [
+        f.name for f in model._meta.fields if isinstance(f, dj_models.ImageField)
+    ]
+    text_fields = [
+        f.name for f in model._meta.fields if isinstance(f, dj_models.TextField)
+    ]
 
     for field in text_fields:
         method_name = f"short_{field}"
@@ -82,12 +64,12 @@ def register_model(model):
         def make_thumb_func(field_name):
             def thumb(self, obj):
                 val = getattr(obj, field_name)
-                if val and hasattr(val, 'url'):
+                if val and hasattr(val, "url"):
                     return format_html(
                         '<a href="{0}" target="_blank">'
                         '<img src="{0}" width="100" height="100" style="object-fit: cover; border-radius: 4px;" />'
-                        '</a>',
-                        val.url
+                        "</a>",
+                        val.url,
                     )
                 return "-"
 
@@ -98,15 +80,11 @@ def register_model(model):
         admin_attrs["list_display"].append(method_name)
 
     # Create and register the admin class
-    admin_class = type(
-        f"{model.__name__}Admin",
-        base_classes,
-        admin_attrs
-    )
+    admin_class = type(f"{model.__name__}Admin", (ImportExportModelAdmin, BaseAdmin), admin_attrs)
     admin.site.register(model, admin_class)
 
 
-# List of models to register
+# Register only concrete models
 registered_models = [
     Address,
 ]
@@ -116,8 +94,3 @@ for model in registered_models:
         register_model(model)
     except Exception as e:
         print(f"Failed to register {model.__name__}: {e}")
-
-class BaseAdmin(admin.ModelAdmin):
-    list_per_page = 10
-    class Meta:
-        abstract = True

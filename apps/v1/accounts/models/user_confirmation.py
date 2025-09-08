@@ -24,7 +24,7 @@ class UserConfirmation(BaseModel):
         help_text=_("Phone number or email to verify"),
     )
     user = models.ForeignKey(
-        "accounts.User",
+        to="accounts.User",
         on_delete=models.CASCADE,
         related_name="confirmations",
         verbose_name=_("User"),

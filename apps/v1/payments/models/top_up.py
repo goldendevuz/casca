@@ -5,7 +5,7 @@ from apps.v1.shared.models import BaseModel
 
 class TopUp(BaseModel):
     profile = models.ForeignKey(
-        "accounts.Profile",
+        to="accounts.Profile",
         on_delete=models.CASCADE,
         related_name="top_ups",
         verbose_name=_("Profile"),
@@ -19,7 +19,7 @@ class TopUp(BaseModel):
         ),
     )
     payment = models.ForeignKey(
-        "payments.Payment",
+        to="payments.Payment",
         on_delete=models.CASCADE,
         related_name="top_ups",
         verbose_name=_("Payment"),

@@ -6,14 +6,14 @@ from apps.v1.shared.models import BaseModel
 
 class MessageStatus(BaseModel):
     message = models.ForeignKey(
-        "messaging.Message",
+        to="messaging.Message",
         on_delete=models.CASCADE,
         related_name="statuses",
         verbose_name=_("Message"),
         help_text=_("The message this status refers to"),
     )
     user = models.ForeignKey(
-        "accounts.Profile",
+        to="accounts.Profile",
         on_delete=models.CASCADE,
         related_name="message_statuses",
         verbose_name=_("User"),

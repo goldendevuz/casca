@@ -5,14 +5,14 @@ from apps.v1.shared.models import BaseModel
 
 class Rate(BaseModel):
     profile = models.ForeignKey(
-        "accounts.Profile",
+        to="accounts.Profile",
         on_delete=models.CASCADE,
         related_name="rates",
         verbose_name=_("Profile"),
         help_text=_("The profile that gave the rating"),
     )
     review = models.ForeignKey(
-        "reviews.Review",
+        to="appointments.Review",
         on_delete=models.CASCADE,
         related_name="rates",
         verbose_name=_("Review"),
