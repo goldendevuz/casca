@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+from apps.v1.shared.enums import AppointmentStatuses
 from apps.v1.shared.models import BaseModel
 
 

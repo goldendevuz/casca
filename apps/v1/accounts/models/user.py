@@ -1,62 +1,89 @@
+import random
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
-from apps.v1.shared.enums import AuthStatuses
+from django.core.exceptions import ValidationError
+from django.contrib.auth.models import AbstractUser
+from apps.v1.shared.models import BaseModel
+from apps.v1.shared.validators import validate_password, validate_username, validate_email_lower, phone_regex
+from ..managers import UserManager
+from ...shared.enums import AuthStatuses, AuthTypes
 
 
-class UserManager(BaseUserManager):
-    use_in_migrations = True
+class User(AbstractUser, BaseModel):
+    # Completely remove them
+    first_name = None
+    last_name = None
 
-    def create_user(self, username=None, email=None, password=None, **extra_fields):
-        if not password:
-            raise ValueError("The password must be set")
-        email = self.normalize_email(email)
-        user = self.model(username=username, email=email, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, username=None, email=None, password=None, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
-        extra_fields.setdefault("is_active", True)
-        return self.create_user(username, email, password, **extra_fields)
-
-
-class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(
-        _("username"),
-        max_length=150,
+    # Restore the email field and make it unique but nullable
+    email = models.EmailField(
         unique=True,
-        blank=True,
+        validators=[validate_email_lower],
         null=True,
+        blank=True,
     )
-    email = models.EmailField(_("email address"), blank=True, null=True)
-    phone = models.CharField(_("phone"), max_length=13, blank=True, null=True)
+
+    # Add a nullable phone field, unique but nullable
+    phone = models.CharField(
+        max_length=13,
+        unique=True,
+        validators=[phone_regex],
+        null=True,
+        blank=True,
+    )
+
     auth_status = models.CharField(
-        _("Auth Status"),
-        max_length=20,
+        max_length=31,
         choices=AuthStatuses.choices,
         default=AuthStatuses.NEW,
     )
-    is_superuser = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
-    last_login = models.DateTimeField(blank=True, null=True)
-    date_joined = models.DateTimeField(default=timezone.now)
-    password = models.CharField(_("password"), max_length=128)
+
+    username = models.CharField(
+        max_length=150,
+        unique=True,
+        validators=[validate_username],
+        null=True,
+        blank=True,
+    )
+
+    password = models.CharField(
+        max_length=128,
+        validators=[validate_password],
+    )
+
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = []  # No required fields during initial creation
 
     objects = UserManager()
 
-    USERNAME_FIELD = "username"
-    EMAIL_FIELD = "email"
-    REQUIRED_FIELDS = []
-
-    class Meta:
-        verbose_name = _("user")
-        verbose_name_plural = _("accounts")
-        ordering = ["-date_joined"]
-
     def __str__(self):
-        return self.username or str(self.id)
+        return self.username or self.email or self.phone or f"user-{self.id}"
+
+    def token(self):
+        from rest_framework_simplejwt.tokens import RefreshToken
+        refresh = RefreshToken.for_user(self)
+        return {
+            "access_token": str(refresh.access_token),
+            "refresh_token": str(refresh),
+        }
+
+    def create_verify_code(self, verify_type):
+        from .user_confirmation import UserConfirmation
+
+        if verify_type not in [AuthTypes.VIA_PHONE.value, AuthTypes.VIA_EMAIL.value]:
+            raise ValidationError("Invalid verification type.")
+
+        if verify_type == AuthTypes.VIA_EMAIL.value and not self.email:
+            raise ValidationError("Email is required for email verification.")
+
+        if verify_type == AuthTypes.VIA_PHONE.value and not self.phone:
+            raise ValidationError("Phone number is required for phone verification.")
+
+        code = random.randint(1000, 9999)
+        verify_value = getattr(self, verify_type)
+
+        UserConfirmation.objects.create(
+            user=self,
+            verify_type=verify_type,
+            verify_value=verify_value,
+            code=code,
+        )
+        return code

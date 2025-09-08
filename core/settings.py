@@ -57,6 +57,7 @@ THIRD_APPS = {
 
 LOCAL_APPS = [
     'apps.v1.shared',
+    'apps.v1.appointments',
     'apps.v1.accounts',
     'apps.v1.barbershops',
     'apps.v1.content',
@@ -77,8 +78,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.middleware.locale.LocaleMiddleware",          # handles guests (Accept-Language, session, cookie)
-    "apps.v1.shared.middleware.UserLanguageMiddleware",   # overrides if user has profile.app_language
+    "django.middleware.locale.LocaleMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
