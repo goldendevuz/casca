@@ -58,7 +58,6 @@ class Profile(BaseModel):
         max_length=150,
         blank=True,
         null=True,
-        unique=True,
         help_text=_("Full name of the user"),
     )
     role = models.CharField(

@@ -13,7 +13,7 @@ User = get_user_model()
 @receiver(post_save, sender=User)
 def create_user_related_objects(sender, instance, created, **kwargs):
     """
-    Signal receiver to create a new Profile, SecuritySetting, LinkedAccount,
+    Signal receiver to create a new Profile, SecuritySetting,
     NotificationSetting, and Wallet whenever a new User is created.
     """
     if created:

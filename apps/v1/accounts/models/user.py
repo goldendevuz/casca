@@ -15,7 +15,6 @@ class User(AbstractUser, BaseModel):
 
     # Restore the email field and make it unique but nullable
     email = models.EmailField(
-        unique=True,
         validators=[validate_email_lower],
         null=True,
         blank=True,
@@ -24,7 +23,6 @@ class User(AbstractUser, BaseModel):
     # Add a nullable phone field, unique but nullable
     phone = models.CharField(
         max_length=13,
-        unique=True,
         validators=[phone_regex],
         null=True,
         blank=True,
@@ -40,8 +38,6 @@ class User(AbstractUser, BaseModel):
         max_length=150,
         unique=True,
         validators=[validate_username],
-        null=True,
-        blank=True,
     )
 
     password = models.CharField(
@@ -64,26 +60,3 @@ class User(AbstractUser, BaseModel):
             "access_token": str(refresh.access_token),
             "refresh_token": str(refresh),
         }
-
-    def create_verify_code(self, verify_type):
-        from .user_confirmation import UserConfirmation
-
-        if verify_type not in [AuthTypes.VIA_PHONE.value, AuthTypes.VIA_EMAIL.value]:
-            raise ValidationError("Invalid verification type.")
-
-        if verify_type == AuthTypes.VIA_EMAIL.value and not self.email:
-            raise ValidationError("Email is required for email verification.")
-
-        if verify_type == AuthTypes.VIA_PHONE.value and not self.phone:
-            raise ValidationError("Phone number is required for phone verification.")
-
-        code = random.randint(1000, 9999)
-        verify_value = getattr(self, verify_type)
-
-        UserConfirmation.objects.create(
-            user=self,
-            verify_type=verify_type,
-            verify_value=verify_value,
-            code=code,
-        )
-        return code

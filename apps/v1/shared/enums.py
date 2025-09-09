@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from icecream import ic
 
 
 class DiscountTypes(models.TextChoices):
@@ -7,7 +8,7 @@ class DiscountTypes(models.TextChoices):
     AMOUNT = "amount", _("Amount")
 
     def __str__(self):
-        return self.label
+        return str(self.label)
 
 
 class NotificationStates(models.TextChoices):
@@ -15,7 +16,7 @@ class NotificationStates(models.TextChoices):
     READ = "read", _("Read")
 
     def __str__(self):
-        return self.label
+        return str(self.label)
 
 
 class UserRoles(models.TextChoices):
@@ -27,7 +28,7 @@ class UserRoles(models.TextChoices):
     SUPER_ADMIN = "super_admin", _("Super Admin")
 
     def __str__(self):
-        return self.label
+        return str(self.label)
 
 
 class Genders(models.TextChoices):
@@ -35,7 +36,7 @@ class Genders(models.TextChoices):
     FEMALE = "female", _("Female")
 
     def __str__(self):
-        return self.label
+        return str(self.label)
 
 
 class AuthStatuses(models.TextChoices):
@@ -44,7 +45,7 @@ class AuthStatuses(models.TextChoices):
     DONE = "done", _("Done")
 
     def __str__(self):
-        return self.label
+        return str(self.label)
 
 
 class AuthTypes(models.TextChoices):
@@ -52,7 +53,8 @@ class AuthTypes(models.TextChoices):
     VIA_EMAIL = "via_email", _("Via Email")
 
     def __str__(self):
-        return self.label
+        ic(str(self.label), self.VIA_EMAIL, self.VIA_PHONE)
+        return str(self.label)
 
 
 class Themes(models.TextChoices):
@@ -61,7 +63,7 @@ class Themes(models.TextChoices):
     DARK = "dark", _("Dark")
 
     def __str__(self):
-        return self.label
+        return str(self.label)
 
 
 class PaymentStatuses(models.TextChoices):
@@ -71,7 +73,7 @@ class PaymentStatuses(models.TextChoices):
     REFUNDED = "refunded", _("Refunded")
 
     def __str__(self):
-        return self.label
+        return str(self.label)
 
 
 class AppointmentStatuses(models.TextChoices):
@@ -85,7 +87,7 @@ class AppointmentStatuses(models.TextChoices):
     REFUNDED = "refunded", _("Refunded")
 
     def __str__(self):
-        return self.label
+        return str(self.label)
 
 
 class ReasonTypes(models.TextChoices):
@@ -98,7 +100,7 @@ class ReasonTypes(models.TextChoices):
     OTHER = "other", _("Other")
 
     def __str__(self):
-        return self.label
+        return str(self.label)
 
 
 class SeatCount(models.TextChoices):
@@ -107,4 +109,4 @@ class SeatCount(models.TextChoices):
     MULTIPLE = "multiple", _("Multiple Seats")
 
     def __str__(self):
-        return self.label
+        return str(self.label)

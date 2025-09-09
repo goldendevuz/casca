@@ -14,15 +14,14 @@ urlpatterns = [
 
     # DRF schema and documentation
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
     # DRF auth
     path(API_V1_URL + 'api-auth/', include('rest_framework.urls')),
 
     # Your app endpoints
-    # path(API_V1_URL + 'users/', include('apps.v1.accounts.urls')),
-    # path(API_V1_URL + 'communications/', include('apps.v1.communications.urls')),
+    path(API_V1_URL + 'accounts/', include('apps.v1.accounts.urls')),
 ]
 
 # Serve media and static files in development

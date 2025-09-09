@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
 ]
 
 THIRD_APPS = {
@@ -185,9 +186,9 @@ REST_FRAMEWORK = {
     ),
     'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json',
     'DEFAULT_PERMISSION_CLASSES': [
-        "rest_framework.permissions.IsAuthenticated",
+        # "rest_framework.permissions.IsAuthenticated",
         # "rest_framework.permissions.AllowAny",
-        # "apps.v1.shared.permissions.HasCompletedSignup",
+        "apps.v1.shared.permissions.HasCompletedSignup",
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.SessionAuthentication',
@@ -252,7 +253,7 @@ EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 # if DEBUG:
 #     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # else:
-    
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 STORAGES = {
