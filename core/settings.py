@@ -79,8 +79,8 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "apps.v1.shared.middleware.UserLanguageMiddleware",  # ✅ custom
     "django.middleware.locale.LocaleMiddleware",
-    # "apps.v1.shared.middleware.UserLanguageMiddleware",  # ✅ custom
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
