@@ -1,10 +1,12 @@
 from django.utils import translation
+from icecream import ic
 from parler.utils.context import switch_language
 from parler_rest import serializers as parler_serializers
 
 
 def _patched_to_representation(self, instance):
     request = self.context.get("request")
+    ic(request)
 
     lang_code = None
     if request and request.user.is_authenticated:

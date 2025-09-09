@@ -80,11 +80,11 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    # "apps.v1.shared.middleware.UserLanguageMiddleware",  # ✅ custom
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
-
 
 ROOT_URLCONF = 'core.urls'
 
@@ -306,10 +306,10 @@ SPECTACULAR_SETTINGS = {
 
 AUTH_USER_MODEL = "accounts.User"
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en'
 
 LANGUAGES = (
-    ("en-us", _("English (US)")),
+    ("en", _("English (US)")),
     ("ru", _("Russian")),
     ("uz", _("Uzbek")),
     ("ar", _("Arabic")),
@@ -324,7 +324,7 @@ LOCALE_PATHS = [
 
 PARLER_LANGUAGES = {
     None: (
-        {'code': 'en-us'},
+        {'code': 'en'},
         {'code': 'ru'},
         {'code': 'uz'},
         {'code': 'ar'},
@@ -332,12 +332,12 @@ PARLER_LANGUAGES = {
         {'code': 'ja'},
     ),
     'default': {
-        'fallback': 'ja',
+        'fallback': 'en',
         'hide_untranslated': False,
     }
 }
 
-PARLER_DEFAULT_LANGUAGE_CODE = "en-us"
+PARLER_DEFAULT_LANGUAGE_CODE = "en"
 
 # Celery
 CELERY_BROKER_URL = CELERY_BROKER_URL

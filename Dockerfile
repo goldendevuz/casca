@@ -27,7 +27,7 @@ RUN chmod +x /usr/src/app/entrypoint.sh /usr/src/app/start.sh
 
 COPY . .
 
-EXPOSE 1030
+EXPOSE 1034
 
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 CMD ["bash", "start.sh"]

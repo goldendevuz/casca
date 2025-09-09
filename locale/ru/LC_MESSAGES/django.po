@@ -1,0 +1,1270 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: GoRide v0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-10 01:07+0500\n"
+"PO-Revision-Date: 2025-09-10 01:09+0500\n"
+"Last-Translator: None None <None>\n"
+"Language-Team: Russian <abdulmajidyunusov2@gmail.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Translated-Using: django-rosetta 0.10.2\n"
+
+#: apps/v1/accounts/models/profile.py:12
+#: apps/v1/accounts/models/user_confirmation.py:30
+#: apps/v1/barbershops/models/barber.py:11
+#: apps/v1/messaging/models/message_status.py:19
+msgid "User"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:13
+msgid "The user account associated with this profile"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:16
+msgid "Location Enabled"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:18
+msgid "Whether the user has enabled location tracking"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:21
+msgid "Avatar"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:25
+msgid "The profile avatar image"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:28
+msgid "Theme"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:32
+msgid "The theme preference for the app"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:40
+msgid "App Language"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:41
+msgid "Preferred app language"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:44
+msgid "Gender"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:49
+msgid "Gender of the user"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:52
+msgid "Birth Date"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:57
+msgid "Full Name"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:61
+msgid "Full name of the user"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:64
+msgid "Role"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:68
+msgid "The role of the user"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:73
+#: apps/v1/appointments/models/rate.py:11
+#: apps/v1/appointments/models/reason.py:12
+#: apps/v1/appointments/models/review.py:11
+#: apps/v1/appointments/models/review_like.py:11
+#: apps/v1/barbershops/models/bookmark.py:11
+#: apps/v1/notifications/models/notification_setting.py:11
+#: apps/v1/notifications/models/user_notification.py:15
+#: apps/v1/payments/models/donate_to_barber.py:11
+#: apps/v1/payments/models/payment.py:13 apps/v1/payments/models/top_up.py:11
+#: apps/v1/payments/models/wallet.py:11
+#: apps/v1/settings/models/security_setting.py:11
+msgid "Profile"
+msgstr ""
+
+#: apps/v1/accounts/models/profile.py:74
+msgid "Profiles"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:10
+#: apps/v1/content/models/language.py:14
+#: apps/v1/payments/models/promotion.py:10
+msgid "Code"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:12
+msgid "The verification code"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:15
+msgid "Verify Type"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:19
+msgid "The type of verification (phone or email)"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:22
+msgid "Verify Value"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:24
+msgid "Phone number or email to verify"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:31
+msgid "The user to confirm"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:34
+#: apps/v1/payments/models/card.py:26
+msgid "Expires At"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:35
+msgid "Expiration datetime of the confirmation code"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:38
+msgid "Is Confirmed"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:40
+msgid "Whether the user has confirmed"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:43
+msgid "Confirmed At"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:46
+msgid "Timestamp when the confirmation was completed"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:51
+msgid "User Confirmation"
+msgstr ""
+
+#: apps/v1/accounts/models/user_confirmation.py:52
+msgid "User Confirmations"
+msgstr ""
+
+#: apps/v1/accounts/serializers.py:146
+msgid "Verify code sent to your email or phone"
+msgstr ""
+
+#: apps/v1/accounts/serializers.py:274
+msgid ""
+"The login or password you entered is incorrect. Please check and try again."
+msgstr ""
+
+#: apps/v1/accounts/views.py:64
+msgid "Tasdiqlash kodingiz xato yoki eskirgan"
+msgstr ""
+
+#: apps/v1/accounts/views.py:113
+msgid "Tasdiqlash kodingiz qaytadan jo'natildi."
+msgstr ""
+
+#: apps/v1/accounts/views.py:125
+msgid "Kodingiz hali ishlatish uchun yaroqli. Biroz kutib turing"
+msgstr ""
+
+#: apps/v1/accounts/views.py:276 apps/v1/accounts/views.py:277
+#| msgid "Hello, world"
+msgid "Hello, world!"
+msgstr "obbo"
+
+#: apps/v1/appointments/models/appointment.py:13 apps/v1/shared/enums.py:24
+msgid "Customer"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:14
+msgid "The profile of the customer"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:20
+#: apps/v1/barbershops/models/barber.py:25
+#: apps/v1/payments/models/donate_to_barber.py:18 apps/v1/shared/enums.py:25
+msgid "Barber"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:21
+msgid "The barber assigned to the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:24
+msgid "Seat Count"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:28
+msgid "The number of seats reserved for the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:36
+#: apps/v1/payments/models/donate_to_barber.py:29
+#: apps/v1/payments/models/payment.py:63 apps/v1/payments/models/top_up.py:25
+msgid "Payment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:37
+msgid "The payment associated with the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:45
+#: apps/v1/payments/models/promotion.py:73
+msgid "Promotion"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:46
+msgid "The promotion applied to the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:49
+msgid "Total Price"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:50
+msgid "The total price of the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:53
+#: apps/v1/payments/models/payment.py:47
+msgid "Status"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:57
+msgid "The status of the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:63
+msgid "Mood During Appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:64
+msgid "The mood recorded during the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:67
+msgid "Date"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:68
+msgid "The date of the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:71
+msgid "Time"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:72
+msgid "The time of the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:78
+#: apps/v1/barbershops/models/barber.py:18
+#: apps/v1/barbershops/models/barbershop.py:50
+#: apps/v1/barbershops/models/bookmark.py:18
+msgid "Barbershop"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:79
+msgid "The barbershop for the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:82
+msgid "Remind Me"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:84
+msgid "Whether to remind the customer about the appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:89
+#: apps/v1/appointments/models/review.py:18
+msgid "Appointment"
+msgstr ""
+
+#: apps/v1/appointments/models/appointment.py:90
+msgid "Appointments"
+msgstr ""
+
+#: apps/v1/appointments/models/mood.py:8
+msgid "Smile"
+msgstr ""
+
+#: apps/v1/appointments/models/mood.py:10
+msgid "The image representing the mood"
+msgstr ""
+
+#: apps/v1/appointments/models/mood.py:15
+msgid "Mood"
+msgstr ""
+
+#: apps/v1/appointments/models/mood.py:16
+msgid "Moods"
+msgstr ""
+
+#: apps/v1/appointments/models/rate.py:12
+msgid "The profile that gave the rating"
+msgstr ""
+
+#: apps/v1/appointments/models/rate.py:18
+#: apps/v1/appointments/models/review.py:28
+#: apps/v1/appointments/models/review_like.py:18
+msgid "Review"
+msgstr ""
+
+#: apps/v1/appointments/models/rate.py:19
+msgid "The review that is being rated"
+msgstr ""
+
+#: apps/v1/appointments/models/rate.py:22
+msgid "Value"
+msgstr ""
+
+#: apps/v1/appointments/models/rate.py:23
+msgid "The rating value given"
+msgstr ""
+
+#: apps/v1/appointments/models/rate.py:34
+msgid "Rate"
+msgstr ""
+
+#: apps/v1/appointments/models/rate.py:35
+msgid "Rates"
+msgstr ""
+
+#: apps/v1/appointments/models/reason.py:13
+msgid "The profile that provided the reason"
+msgstr ""
+
+#: apps/v1/appointments/models/reason.py:16
+msgid "Reason Type"
+msgstr ""
+
+#: apps/v1/appointments/models/reason.py:20
+msgid "The type of reason provided"
+msgstr ""
+
+#: apps/v1/appointments/models/reason.py:23
+#: apps/v1/messaging/models/message.py:44
+#: apps/v1/messaging/models/message_status.py:12
+msgid "Message"
+msgstr ""
+
+#: apps/v1/appointments/models/reason.py:26
+msgid "Optional message describing the reason in more detail"
+msgstr ""
+
+#: apps/v1/appointments/models/reason.py:31
+msgid "Reason"
+msgstr ""
+
+#: apps/v1/appointments/models/reason.py:32
+msgid "Reasons"
+msgstr ""
+
+#: apps/v1/appointments/models/review.py:12
+msgid "The profile that wrote the review"
+msgstr ""
+
+#: apps/v1/appointments/models/review.py:19
+msgid "The appointment associated with the review"
+msgstr ""
+
+#: apps/v1/appointments/models/review.py:22
+#: apps/v1/messaging/models/message.py:22 apps/v1/shared/models/address.py:19
+msgid "Text"
+msgstr ""
+
+#: apps/v1/appointments/models/review.py:23
+msgid "The content of the review"
+msgstr ""
+
+#: apps/v1/appointments/models/review.py:29
+msgid "Reviews"
+msgstr ""
+
+#: apps/v1/appointments/models/review_like.py:12
+msgid "The profile that liked the review"
+msgstr ""
+
+#: apps/v1/appointments/models/review_like.py:19
+msgid "The review that was liked"
+msgstr ""
+
+#: apps/v1/appointments/models/review_like.py:30
+msgid "Review Like"
+msgstr ""
+
+#: apps/v1/appointments/models/review_like.py:31
+msgid "Review Likes"
+msgstr ""
+
+#: apps/v1/barbershops/models/barber.py:12
+msgid "The user account for the barber"
+msgstr ""
+
+#: apps/v1/barbershops/models/barber.py:19
+msgid "The barbershop this barber works at"
+msgstr ""
+
+#: apps/v1/barbershops/models/barber.py:26
+msgid "Barbers"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:12
+#: apps/v1/messaging/models/message.py:11
+msgid "Owner"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:13
+msgid "The profile that owns the barbershop"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:19
+#: apps/v1/shared/models/address.py:34
+msgid "Address"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:20
+msgid "The address of the barbershop"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:23
+#: apps/v1/barbershops/models/package.py:13
+msgid "Image"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:26
+msgid "The image representing the barbershop"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:29
+msgid "Rating"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:31
+msgid "The average rating of the barbershop"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:36
+#: apps/v1/content/models/privacy_policy.py:16
+#: apps/v1/notifications/models/notification.py:15
+#: apps/v1/notifications/models/user_notification.py:33
+#: apps/v1/payments/models/promotion.py:59
+msgid "Title"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:39
+msgid "The title of the barbershop"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:42
+#: apps/v1/content/models/privacy_policy.py:22
+#: apps/v1/notifications/models/notification.py:20
+#: apps/v1/notifications/models/user_notification.py:38
+#: apps/v1/payments/models/promotion.py:64
+msgid "Description"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:44
+msgid "The description of the barbershop"
+msgstr ""
+
+#: apps/v1/barbershops/models/barbershop.py:51
+msgid "Barbershops"
+msgstr ""
+
+#: apps/v1/barbershops/models/bookmark.py:12
+msgid "The profile that created the bookmark"
+msgstr ""
+
+#: apps/v1/barbershops/models/bookmark.py:19
+msgid "The barbershop that was bookmarked"
+msgstr ""
+
+#: apps/v1/barbershops/models/bookmark.py:25
+msgid "Bookmark"
+msgstr ""
+
+#: apps/v1/barbershops/models/bookmark.py:26
+msgid "Bookmarks"
+msgstr ""
+
+#: apps/v1/barbershops/models/package.py:9
+msgid "Price"
+msgstr ""
+
+#: apps/v1/barbershops/models/package.py:10
+msgid "The price of the package"
+msgstr ""
+
+#: apps/v1/barbershops/models/package.py:16
+msgid "The image representing the package"
+msgstr ""
+
+#: apps/v1/barbershops/models/package.py:22
+#: apps/v1/barbershops/models/service.py:19
+msgid "Service"
+msgstr ""
+
+#: apps/v1/barbershops/models/package.py:23
+msgid "The service this package belongs to"
+msgstr ""
+
+#: apps/v1/barbershops/models/package.py:28
+#: apps/v1/barbershops/models/service.py:10
+#: apps/v1/content/models/language.py:8
+#: apps/v1/payments/models/payment_type.py:10
+#: apps/v1/shared/models/address.py:24
+msgid "Name"
+msgstr ""
+
+#: apps/v1/barbershops/models/package.py:31
+msgid "The name of the package"
+msgstr ""
+
+#: apps/v1/barbershops/models/package.py:37
+msgid "Package"
+msgstr ""
+
+#: apps/v1/barbershops/models/package.py:38
+msgid "Packages"
+msgstr ""
+
+#: apps/v1/barbershops/models/service.py:13
+msgid "The name of the service"
+msgstr ""
+
+#: apps/v1/barbershops/models/service.py:20
+msgid "Services"
+msgstr ""
+
+#: apps/v1/content/models/language.py:11
+msgid "The name of the language"
+msgstr ""
+
+#: apps/v1/content/models/language.py:18
+msgid "The language code, e.g., 'english_us'"
+msgstr ""
+
+#: apps/v1/content/models/language.py:23
+msgid "Language"
+msgstr ""
+
+#: apps/v1/content/models/language.py:24
+msgid "Languages"
+msgstr ""
+
+#: apps/v1/content/models/privacy_policy.py:9
+#: apps/v1/payments/models/promotion.py:52
+msgid "Display Order"
+msgstr ""
+
+#: apps/v1/content/models/privacy_policy.py:11
+msgid "The order in which the privacy policy is displayed"
+msgstr ""
+
+#: apps/v1/content/models/privacy_policy.py:19
+msgid "The title of the privacy policy"
+msgstr ""
+
+#: apps/v1/content/models/privacy_policy.py:24
+msgid "The description of the privacy policy"
+msgstr ""
+
+#: apps/v1/content/models/privacy_policy.py:30
+msgid "Privacy Policy"
+msgstr ""
+
+#: apps/v1/content/models/privacy_policy.py:31
+msgid "Privacy Policies"
+msgstr ""
+
+#: apps/v1/messaging/models/message.py:12
+msgid "The profile that sent the message"
+msgstr ""
+
+#: apps/v1/messaging/models/message.py:18
+msgid "Receiver"
+msgstr ""
+
+#: apps/v1/messaging/models/message.py:19
+msgid "The profile that receives the message"
+msgstr ""
+
+#: apps/v1/messaging/models/message.py:25
+msgid "The text content of the message"
+msgstr ""
+
+#: apps/v1/messaging/models/message.py:33 apps/v1/messaging/models/voice.py:15
+msgid "Voice"
+msgstr ""
+
+#: apps/v1/messaging/models/message.py:34
+msgid "The voice/audio attached to the message"
+msgstr ""
+
+#: apps/v1/messaging/models/message.py:37
+msgid "Encrypted"
+msgstr ""
+
+#: apps/v1/messaging/models/message.py:39
+msgid "Whether the message is encrypted"
+msgstr ""
+
+#: apps/v1/messaging/models/message.py:45
+msgid "Messages"
+msgstr ""
+
+#: apps/v1/messaging/models/message_status.py:13
+msgid "The message this status refers to"
+msgstr ""
+
+#: apps/v1/messaging/models/message_status.py:20
+msgid "The user this status belongs to"
+msgstr ""
+
+#: apps/v1/messaging/models/message_status.py:23
+msgid "Is Read"
+msgstr ""
+
+#: apps/v1/messaging/models/message_status.py:25
+msgid "Whether the message has been read by the user"
+msgstr ""
+
+#: apps/v1/messaging/models/message_status.py:28
+msgid "Is Played"
+msgstr ""
+
+#: apps/v1/messaging/models/message_status.py:30
+msgid "Whether the message media has been played by the user"
+msgstr ""
+
+#: apps/v1/messaging/models/message_status.py:33
+msgid "Updated At"
+msgstr ""
+
+#: apps/v1/messaging/models/message_status.py:36
+msgid "Timestamp when the status was last updated"
+msgstr ""
+
+#: apps/v1/messaging/models/message_status.py:42
+msgid "Message Status"
+msgstr ""
+
+#: apps/v1/messaging/models/message_status.py:43
+msgid "Message Statuses"
+msgstr ""
+
+#: apps/v1/messaging/models/voice.py:8
+msgid "File"
+msgstr ""
+
+#: apps/v1/messaging/models/voice.py:10
+msgid "The voice/audio file"
+msgstr ""
+
+#: apps/v1/messaging/models/voice.py:16
+msgid "Voices"
+msgstr ""
+
+#: apps/v1/notifications/models/notification.py:9
+msgid "Icon"
+msgstr ""
+
+#: apps/v1/notifications/models/notification.py:10
+msgid "The icon associated with the notification"
+msgstr ""
+
+#: apps/v1/notifications/models/notification.py:17
+#: apps/v1/notifications/models/user_notification.py:35
+msgid "The title of the notification"
+msgstr ""
+
+#: apps/v1/notifications/models/notification.py:21
+#: apps/v1/notifications/models/user_notification.py:39
+msgid "The description or body of the notification"
+msgstr ""
+
+#: apps/v1/notifications/models/notification.py:27
+msgid "Notification"
+msgstr ""
+
+#: apps/v1/notifications/models/notification.py:28
+msgid "Notifications"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:12
+msgid "The profile this notification setting belongs to"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:15
+msgid "General Notification"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:19
+msgid "Sound"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:23
+msgid "Vibrate"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:27
+msgid "Special Offers"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:31
+msgid "Promotions and Discounts"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:35
+#: apps/v1/payments/models/payment.py:64
+msgid "Payments"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:39
+msgid "Cashback"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:43
+msgid "New Service Available"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:47
+msgid "New Tips Available"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:51
+msgid "App Updates"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:56
+msgid "Notification Setting"
+msgstr ""
+
+#: apps/v1/notifications/models/notification_setting.py:57
+msgid "Notification Settings"
+msgstr ""
+
+#: apps/v1/notifications/models/user_notification.py:16
+msgid "The profile that receives this notification"
+msgstr ""
+
+#: apps/v1/notifications/models/user_notification.py:19
+msgid "State"
+msgstr ""
+
+#: apps/v1/notifications/models/user_notification.py:23
+msgid "The current state of the notification"
+msgstr ""
+
+#: apps/v1/notifications/models/user_notification.py:26
+msgid "Sent At"
+msgstr ""
+
+#: apps/v1/notifications/models/user_notification.py:28
+msgid "The datetime when the notification was sent"
+msgstr ""
+
+#: apps/v1/notifications/models/user_notification.py:45
+msgid "User Notification"
+msgstr ""
+
+#: apps/v1/notifications/models/user_notification.py:46
+msgid "User Notifications"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:11 apps/v1/payments/models/wallet.py:22
+msgid "Wallet"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:12
+msgid "The wallet this card belongs to"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:15
+msgid "Card Number"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:18
+msgid "16-digit card number"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:21
+msgid "Account Holder Name"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:23
+msgid "The name of the cardholder"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:27
+msgid "The expiry date of the card"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:30
+msgid "CVV"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:31
+msgid "3-digit security code on the card"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:36
+msgid "Card"
+msgstr ""
+
+#: apps/v1/payments/models/card.py:37
+msgid "Cards"
+msgstr ""
+
+#: apps/v1/payments/models/donate_to_barber.py:12
+msgid "The profile that made the donation"
+msgstr ""
+
+#: apps/v1/payments/models/donate_to_barber.py:19
+msgid "The barber receiving the donation"
+msgstr ""
+
+#: apps/v1/payments/models/donate_to_barber.py:22
+#: apps/v1/payments/models/payment.py:17 apps/v1/payments/models/top_up.py:15
+#: apps/v1/shared/enums.py:8
+msgid "Amount"
+msgstr ""
+
+#: apps/v1/payments/models/donate_to_barber.py:23
+msgid "The amount donated"
+msgstr ""
+
+#: apps/v1/payments/models/donate_to_barber.py:30
+msgid "The payment used for the donation"
+msgstr ""
+
+#: apps/v1/payments/models/donate_to_barber.py:35
+msgid "Donate to Barber"
+msgstr ""
+
+#: apps/v1/payments/models/donate_to_barber.py:36
+msgid "Donations to Barbers"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:14
+msgid "The profile that made the payment"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:18
+msgid "The amount of the payment"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:24
+#: apps/v1/payments/models/payment_type.py:19
+msgid "Payment Type"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:25
+msgid "The type/method of the payment"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:28
+msgid "Paid At"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:31
+msgid "Timestamp when the payment was made"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:37
+msgid "Reviewed By"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:38
+msgid "Profile who reviewed the payment"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:41
+msgid "Reviewed At"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:44
+msgid "Timestamp when the payment was reviewed"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:51
+msgid "Current status of the payment"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:54
+msgid "Receipt"
+msgstr ""
+
+#: apps/v1/payments/models/payment.py:58
+msgid "Uploaded receipt file"
+msgstr ""
+
+#: apps/v1/payments/models/payment_type.py:13
+msgid "The name of the payment type"
+msgstr ""
+
+#: apps/v1/payments/models/payment_type.py:20
+msgid "Payment Types"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:15
+msgid "The unique code for the promotion"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:18
+msgid "Discount Type"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:22
+msgid "The type of discount applied"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:25
+msgid "Discount Value"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:26
+msgid "The value of the discount"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:29
+msgid "Valid To"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:32
+msgid "The expiry date of the promotion"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:35
+msgid "Minimum Spend"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:38
+msgid "Minimum spend required to apply this promotion"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:41
+msgid "Usage Limit"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:44
+msgid "Maximum number of times this promotion can be used"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:47
+msgid "Used Count"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:49
+msgid "Number of times the promotion has been used"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:54
+msgid "Order in which the promotion is displayed"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:61
+msgid "The title of the promotion"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:67
+msgid "Optional description of the promotion"
+msgstr ""
+
+#: apps/v1/payments/models/promotion.py:74
+msgid "Promotions"
+msgstr ""
+
+#: apps/v1/payments/models/top_up.py:12
+msgid "The profile that performed the top-up"
+msgstr ""
+
+#: apps/v1/payments/models/top_up.py:17
+msgid ""
+"Allowed amounts: 5.000, 10.000, 20.000, 25.000, 50.000, 75.000, 100.000, "
+"200.000 or a custom amount"
+msgstr ""
+
+#: apps/v1/payments/models/top_up.py:26
+msgid "The payment associated with this top-up"
+msgstr ""
+
+#: apps/v1/payments/models/top_up.py:31
+msgid "Top-Up"
+msgstr ""
+
+#: apps/v1/payments/models/top_up.py:32
+msgid "Top-Ups"
+msgstr ""
+
+#: apps/v1/payments/models/wallet.py:12
+msgid "The profile this wallet belongs to"
+msgstr ""
+
+#: apps/v1/payments/models/wallet.py:15
+msgid "Balance"
+msgstr ""
+
+#: apps/v1/payments/models/wallet.py:17
+msgid "Current balance of the wallet"
+msgstr ""
+
+#: apps/v1/payments/models/wallet.py:23
+msgid "Wallets"
+msgstr ""
+
+#: apps/v1/settings/models/security_setting.py:12
+msgid "The profile this security setting belongs to"
+msgstr ""
+
+#: apps/v1/settings/models/security_setting.py:15
+msgid "Biometric ID"
+msgstr ""
+
+#: apps/v1/settings/models/security_setting.py:17
+msgid "Whether biometric ID authentication is enabled"
+msgstr ""
+
+#: apps/v1/settings/models/security_setting.py:20
+msgid "Face ID"
+msgstr ""
+
+#: apps/v1/settings/models/security_setting.py:22
+msgid "Whether Face ID authentication is enabled"
+msgstr ""
+
+#: apps/v1/settings/models/security_setting.py:25
+msgid "Google Authenticator"
+msgstr ""
+
+#: apps/v1/settings/models/security_setting.py:27
+msgid "Whether Google Authenticator is enabled"
+msgstr ""
+
+#: apps/v1/settings/models/security_setting.py:31
+msgid "Security Setting"
+msgstr ""
+
+#: apps/v1/settings/models/security_setting.py:32
+msgid "Security Settings"
+msgstr ""
+
+#: apps/v1/shared/enums.py:7
+msgid "Percent"
+msgstr ""
+
+#: apps/v1/shared/enums.py:15 apps/v1/shared/enums.py:43
+msgid "New"
+msgstr ""
+
+#: apps/v1/shared/enums.py:16
+msgid "Read"
+msgstr ""
+
+#: apps/v1/shared/enums.py:23
+msgid "Ordinary User"
+msgstr ""
+
+#: apps/v1/shared/enums.py:26
+msgid "Manager"
+msgstr ""
+
+#: apps/v1/shared/enums.py:27
+msgid "Admin"
+msgstr ""
+
+#: apps/v1/shared/enums.py:28
+msgid "Super Admin"
+msgstr ""
+
+#: apps/v1/shared/enums.py:35
+msgid "Male"
+msgstr ""
+
+#: apps/v1/shared/enums.py:36
+msgid "Female"
+msgstr ""
+
+#: apps/v1/shared/enums.py:44
+msgid "Code Verified"
+msgstr ""
+
+#: apps/v1/shared/enums.py:45
+msgid "Done"
+msgstr ""
+
+#: apps/v1/shared/enums.py:52
+msgid "Via Phone"
+msgstr ""
+
+#: apps/v1/shared/enums.py:53
+msgid "Via Email"
+msgstr ""
+
+#: apps/v1/shared/enums.py:61
+msgid "System"
+msgstr ""
+
+#: apps/v1/shared/enums.py:62
+msgid "Light"
+msgstr ""
+
+#: apps/v1/shared/enums.py:63
+msgid "Dark"
+msgstr ""
+
+#: apps/v1/shared/enums.py:70 apps/v1/shared/enums.py:80
+msgid "Pending"
+msgstr ""
+
+#: apps/v1/shared/enums.py:71
+msgid "Paid"
+msgstr ""
+
+#: apps/v1/shared/enums.py:72
+msgid "Failed"
+msgstr ""
+
+#: apps/v1/shared/enums.py:73 apps/v1/shared/enums.py:87
+msgid "Refunded"
+msgstr ""
+
+#: apps/v1/shared/enums.py:81
+msgid "Scheduled"
+msgstr ""
+
+#: apps/v1/shared/enums.py:82
+msgid "Canceled"
+msgstr ""
+
+#: apps/v1/shared/enums.py:83
+msgid "Rescheduled"
+msgstr ""
+
+#: apps/v1/shared/enums.py:84
+msgid "Approved"
+msgstr ""
+
+#: apps/v1/shared/enums.py:85
+msgid "Ongoing"
+msgstr ""
+
+#: apps/v1/shared/enums.py:86
+msgid "Completed"
+msgstr ""
+
+#: apps/v1/shared/enums.py:94
+msgid "Change in Plans"
+msgstr ""
+
+#: apps/v1/shared/enums.py:95
+msgid "Unable to Contact Barber"
+msgstr ""
+
+#: apps/v1/shared/enums.py:96
+msgid "Wrong Address Shown"
+msgstr ""
+
+#: apps/v1/shared/enums.py:97
+msgid "This Price is Not Reasonable"
+msgstr ""
+
+#: apps/v1/shared/enums.py:98
+msgid "Booking Mistake"
+msgstr ""
+
+#: apps/v1/shared/enums.py:99
+msgid "Poor Weather Conditions"
+msgstr ""
+
+#: apps/v1/shared/enums.py:100
+msgid "Other"
+msgstr ""
+
+#: apps/v1/shared/enums.py:107
+msgid "One Seat"
+msgstr ""
+
+#: apps/v1/shared/enums.py:108
+msgid "Two Seats"
+msgstr ""
+
+#: apps/v1/shared/enums.py:109
+msgid "Multiple Seats"
+msgstr ""
+
+#: apps/v1/shared/models/address.py:9
+msgid "Longitude"
+msgstr ""
+
+#: apps/v1/shared/models/address.py:10
+msgid "Longitude of the address"
+msgstr ""
+
+#: apps/v1/shared/models/address.py:13
+msgid "Latitude"
+msgstr ""
+
+#: apps/v1/shared/models/address.py:14
+msgid "Latitude of the address"
+msgstr ""
+
+#: apps/v1/shared/models/address.py:21
+msgid "The text representation of the address"
+msgstr ""
+
+#: apps/v1/shared/models/address.py:28
+msgid "Optional name of the address"
+msgstr ""
+
+#: apps/v1/shared/models/address.py:35
+msgid "Addresses"
+msgstr ""
+
+#: core/settings.py:312
+msgid "English (US)"
+msgstr ""
+
+#: core/settings.py:313
+msgid "Russian"
+msgstr ""
+
+#: core/settings.py:314
+msgid "Uzbek"
+msgstr ""
+
+#: core/settings.py:315
+msgid "Arabic"
+msgstr ""
+
+#: core/settings.py:316
+msgid "Tajik"
+msgstr ""
+
+#: core/settings.py:317
+msgid "Japanese"
+msgstr ""

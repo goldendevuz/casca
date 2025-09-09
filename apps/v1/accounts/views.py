@@ -1,4 +1,4 @@
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.utils.translation import gettext_lazy as _
 
 from apps.v1.shared.utils.verification import VerificationService
@@ -16,7 +16,7 @@ from rest_framework.decorators import api_view
 from icecream import ic
 
 from apps.v1.shared.utility import send_email, check_username_phone_email, send_phone_code
-from .serializers import SignUpSerializer, UpdateUserInformation, UpdateUserPhotoSerializer, LoginSerializer, \
+from .serializers import SignUpSerializer, UpdateUserInformation, LoginSerializer, \
     LoginRefreshSerializer, LogoutSerializer, ResetPasswordSerializer, ForgetPasswordSerializer, ProfileSerializer, UserResponseSerializer
 from .models import Profile, User, UserConfirmation
 from ..shared.enums import AuthTypes, AuthStatuses
@@ -67,6 +67,7 @@ class VerifyAPIView(APIView):
         verification.is_confirmed = True
         verification.confirmed_at = timezone.now()
         verification.save()
+        ic(user.auth_status, AuthStatuses.NEW)
 
         if user.auth_status == AuthStatuses.NEW:
             user.auth_status = AuthStatuses.CODE_VERIFIED
@@ -261,6 +262,16 @@ class PasswordGeneratorView(APIView):
 
         return Response(result, status=status.HTTP_200_OK)
 
+
 @api_view(['GET'])
 def test_login(request):
+    # Get user's language preference
+    user_language = request.user.profile.app_language.code
+    ic(user_language)
+
+    # Activate the user's language directly
+    translation.activate(user_language)
+
+    # Now gettext will use the activated language
+    ic(_("Hello, world!"))
     return Response({"message": _("Hello, world!")})

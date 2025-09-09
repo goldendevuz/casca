@@ -17,8 +17,8 @@ echo "========== Starting Tunnels =========="
 if [ -n "$JPRQ_AUTH_KEY" ]; then
   echo "Authenticating jprq..."
   jprq auth "$JPRQ_AUTH_KEY"
-  echo "Starting jprq tunnel on port 1030..."
-  jprq http 1030 -s "$JPRQ_URL" > jprq.log 2>&1 &
+  echo "Starting jprq tunnel on port 1034..."
+  jprq http 1034 -s "$JPRQ_URL" > jprq.log 2>&1 &
   sleep 2
   JPRQ_URL=$(grep -o 'https://[a-zA-Z0-9.-]*\.jprq\.site' jprq.log | head -n1)
 fi
@@ -31,6 +31,6 @@ echo "================================="
 echo "🚀 Starting Uvicorn ASGI server with reload..."
 exec uvicorn core.asgi:application \
     --host 0.0.0.0 \
-    --port 1030 \
+    --port 1034 \
     --reload \
     --reload-dir /usr/src/app

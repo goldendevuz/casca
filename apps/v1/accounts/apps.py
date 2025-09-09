@@ -7,4 +7,5 @@ class AccountsConfig(AppConfig):
     label = 'accounts'
 
     def ready(self):
+        import apps.v1.shared.patches  # noqa
         import apps.v1.accounts.signals # noqa

@@ -31,7 +31,16 @@ class ProfileSerializer(serializers.ModelSerializer):
 # --------------------
 # User Response Serializer (output)
 # --------------------
+from rest_framework import serializers
+from apps.v1.accounts.models import User  # adjust import if needed
+
 class UserResponseSerializer(serializers.ModelSerializer):
+    # Profile fields
+    full_name = serializers.CharField(source="profile.full_name", read_only=True)
+    gender = serializers.CharField(source="profile.gender", read_only=True)
+    birth_date = serializers.DateField(source="profile.birth_date", read_only=True)
+    avatar_url = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = User
         fields = [
@@ -47,8 +56,20 @@ class UserResponseSerializer(serializers.ModelSerializer):
             "phone",
             "auth_status",
             "username",
+            "full_name",
+            "gender",
+            "birth_date",
+            "avatar_url",
         ]
 
+    def get_avatar_url(self, obj):
+        if obj.profile.avatar:
+            request = self.context.get("request")
+            url = obj.profile.avatar.url
+            if request:
+                return request.build_absolute_uri(url)
+            return url
+        return None
 
 # --------------------
 # SignUp Serializer (main)
@@ -126,10 +147,9 @@ class SignUpSerializer(serializers.Serializer):
                 **(instance.token() if callable(getattr(instance, "token", None)) else {})
             }
 
+from rest_framework import serializers
+from apps.v1.shared.enums import AuthStatuses
 
-# --------------------
-# (other serializers left unchanged; included here for completeness)
-# --------------------
 class UpdateUserInformation(serializers.Serializer):
     # User fields
     username = serializers.CharField(write_only=True, required=True)
@@ -144,14 +164,27 @@ class UpdateUserInformation(serializers.Serializer):
         choices=[("male", "Male"), ("female", "Female")],
     )
     birth_date = serializers.DateField(write_only=True, required=True)
-    avatar = serializers.ImageField(write_only=True, required=False, allow_null=True)
+    avatar = serializers.ImageField(required=False, allow_null=True, write_only=True)
+
+    # Read-only field for response
+    avatar_url = serializers.SerializerMethodField(read_only=True)
+
+    def get_avatar_url(self, obj):
+        # obj → User instance
+        if obj.profile.avatar:
+            request = self.context.get("request")
+            avatar_url = obj.profile.avatar.url
+            if request:
+                return request.build_absolute_uri(avatar_url)
+            return avatar_url
+        return None
 
     def validate(self, data):
         password = data.get("password")
         confirm_password = data.get("confirm_password")
 
         if password != confirm_password:
-            raise ValidationError(
+            raise serializers.ValidationError(
                 {"message": "Parolingiz va tasdiqlash parolingiz bir-biriga teng emas"}
             )
         if password:
@@ -161,21 +194,16 @@ class UpdateUserInformation(serializers.Serializer):
 
     def validate_username(self, username):
         if len(username) < 5 or len(username) > 30:
-            raise ValidationError(
+            raise serializers.ValidationError(
                 {"message": "Username must be between 5 and 30 characters long"}
             )
         if username.isdigit():
-            raise ValidationError(
+            raise serializers.ValidationError(
                 {"message": "This username is entirely numeric"}
             )
         return username
 
     def update(self, instance, validated_data):
-        """
-        instance → User object
-        instance.profile → related Profile object
-        """
-
         # Update User
         instance.username = validated_data.get("username", instance.username)
         if validated_data.get("password"):
@@ -198,21 +226,6 @@ class UpdateUserInformation(serializers.Serializer):
             instance.auth_status = AuthStatuses.DONE
 
         instance.save()
-        return instance
-
-
-class UpdateUserPhotoSerializer(serializers.Serializer):
-    photo = serializers.ImageField(validators=[FileExtensionValidator(allowed_extensions=[
-        'jpg', 'jpeg', 'png', 'heic', 'heif'
-    ])])
-
-    def update(self, instance, validated_data):
-        photo = validated_data.get('photo')
-        if photo:
-            instance.photo = photo
-            instance.auth_status = AuthStatuses.DONE
-            instance.save()
-
         return instance
 
 
