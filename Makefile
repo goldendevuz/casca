@@ -57,3 +57,5 @@ restart:
 	sudo docker rm -f casca_api casca_nginx casca_redis & make down & make up
 seed_languages:
 	python manage.py seed_languages
+populate_services:
+	python manage.py populate_services
