@@ -11,6 +11,7 @@ from .models import (
     Card,
     PaymentType,
     Payment,
+    PromotionCategory,
     Promotion,
     TopUp,
     DonateToBarber,
@@ -123,6 +124,7 @@ registered_models = [
     PaymentType,
     Payment,
     Promotion,
+    PromotionCategory,
     TopUp,
     DonateToBarber,
 ]
