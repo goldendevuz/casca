@@ -7,7 +7,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.validators import FileExtensionValidator, validate_email
 from icecream import ic
 
-from apps.v1.shared.enums import AuthStatuses, AuthTypes
+from apps.v1.shared.enums import AuthStatuses, AuthTypes, Genders
 from apps.v1.shared.utils.verification import VerificationService
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
@@ -161,7 +161,7 @@ class UpdateUserInformation(serializers.Serializer):
     gender = serializers.ChoiceField(
         write_only=True,
         required=True,
-        choices=[("male", "Male"), ("female", "Female")],
+        choices=Genders.choices,
     )
     birth_date = serializers.DateField(write_only=True, required=True)
     avatar = serializers.ImageField(required=False, allow_null=True, write_only=True)
