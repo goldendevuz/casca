@@ -17,7 +17,7 @@ from icecream import ic
 
 from apps.v1.shared.utility import send_email, check_username_phone_email, send_phone_code
 from .serializers import SignUpSerializer, UpdateUserInformation, LoginSerializer, \
-    LoginRefreshSerializer, LogoutSerializer, ResetPasswordSerializer, ForgetPasswordSerializer, ProfileSerializer, UserResponseSerializer
+    LoginRefreshSerializer, LogoutSerializer, ResetPasswordSerializer, ForgotPasswordSerializer, ProfileSerializer, UserResponseSerializer
 from .models import Profile, User, UserConfirmation
 from ..shared.enums import AuthTypes, AuthStatuses
 
@@ -157,58 +157,82 @@ class LogOutView(APIView):
     serializer_class = LogoutSerializer
 
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=self.request.data)
+        serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
+
+        refresh_token = serializer.validated_data["refresh"]
+
         try:
-            refresh_token = self.request.data['refresh']
             token = RefreshToken(refresh_token)
             token.blacklist()
-            data = {
-                'success': True,
-                'message': "You are loggout out"
-            }
-            return Response(data, status=205)
-        except TokenError:
-            data = {
-                "message": "Token is invalid or expired"
-            }
-            raise ValidationError(data)
 
-class ResetPasswordView(APIView):
-    permission_classes = [AllowAny]
-    serializer_class = ResetPasswordSerializer
+            return Response(
+                {
+                    "data": {
+                        "type": "logout",
+                        "attributes": {
+                            "success": True,
+                            "message": "You have been logged out."
+                        }
+                    }
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        except TokenError:
+            raise ValidationError({
+                "refresh": "Token is invalid or expired."
+            })
+
+class ForgotPasswordView(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = ForgotPasswordSerializer
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=self.request.data)
         serializer.is_valid(raise_exception=True)
-        username_phone_email = serializer.validated_data.get('username_phone_email')
+        email_or_phone = serializer.validated_data.get('email_or_phone')
         user = serializer.validated_data.get('user')
-        if check_username_phone_email(username_phone_email) == 'phone':
-            code = user.create_verify_code(AuthTypes.VIA_PHONE)
-            send_email(username_phone_email, code)
-        elif check_username_phone_email(username_phone_email) == 'email':
-            code = user.create_verify_code(AuthTypes.VIA_EMAIL)
-            send_email(username_phone_email, code)
+
+        input_type = check_username_phone_email(email_or_phone)
+        VerificationService.create_and_send_code(
+            user=user,
+            verify_type=f"via_{input_type}",
+            verify_value=email_or_phone
+        )
 
         return Response(
             {
                 "success": True,
                 'message': "Tasdiqlash kodi muvaffaqiyatli yuborildi",
-                "access_token": user.token()['access_token'],
+                "access": user.token()['access_token'],
                 "refresh": user.token()['refresh_token'],
                 "user_status": user.auth_status,
-            }, status=status.HTTP_200_OK
+            }, status=200
         )
 
-class ForgetPasswordAPIView(GenericAPIView):
-    serializer_class = ForgetPasswordSerializer
-    permission_classes = [AllowAny]
+class ResetPasswordView(UpdateAPIView):
+    serializer_class = ResetPasswordSerializer
+    permission_classes = (IsAuthenticated,)
+    http_method_names = ('put',)
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        data = serializer.save()
-        return Response(data, status=status.HTTP_200_OK)
+    def get_object(self):
+        return self.request.user
+
+    def update(self, request, *args, **kwargs):
+        response = super(ResetPasswordView, self).update(request, *args, **kwargs)
+        try:
+            user = User.objects.get(id=response.data.get('id'))
+        except:
+            raise NotFound(detail='User not found')
+        return Response(
+            {
+                'success': True,
+                'message': "Parolingiz muvaffaqiyatli o'zgartirildi",
+                'access': user.token()['access_token'],
+                'refresh': user.token()['refresh_token'],
+            }
+        )
 
 class PasswordGeneratorView(APIView):
     permission_classes = [AllowAny]

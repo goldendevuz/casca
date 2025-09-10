@@ -166,41 +166,54 @@ USE_L10N = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 10,
-    'DEFAULT_PAGINATION_CLASS':
-        'rest_framework_json_api.pagination.JsonApiPageNumberPagination',
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework_json_api.renderers.JSONRenderer',
-        'rest_framework_json_api.renderers.BrowsableAPIRenderer',
+    # ⚡ Pagination (JSON:API compatible)
+    "PAGE_SIZE": 10,
+    "DEFAULT_PAGINATION_CLASS": "rest_framework_json_api.pagination.JsonApiPageNumberPagination",
+
+    # 🎨 Renderers (JSON:API first)
+    "DEFAULT_RENDERER_CLASSES": (
+        "rest_framework_json_api.renderers.JSONRenderer",
+        "rest_framework_json_api.renderers.BrowsableAPIRenderer",  # disable in prod if not needed
     ),
-    'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
-    'DEFAULT_FILTER_BACKENDS': (
-        'rest_framework_json_api.filters.QueryParameterValidationFilter',
-        'rest_framework_json_api.filters.OrderingFilter',
-        'rest_framework_json_api.django_filters.DjangoFilterBackend',
-        'rest_framework.filters.SearchFilter',
+
+    # 📝 Metadata
+    "DEFAULT_METADATA_CLASS": "rest_framework_json_api.metadata.JSONAPIMetadata",
+
+    # 🔎 Filtering, Ordering, Searching
+    "DEFAULT_FILTER_BACKENDS": (
+        "rest_framework_json_api.filters.QueryParameterValidationFilter",
+        "rest_framework_json_api.filters.OrderingFilter",
+        "rest_framework_json_api.django_filters.DjangoFilterBackend",
+        "rest_framework.filters.SearchFilter",
     ),
-    'SEARCH_PARAM': 'filter[search]',
-    'TEST_REQUEST_RENDERER_CLASSES': (
-        'rest_framework_json_api.renderers.JSONRenderer',
+    "SEARCH_PARAM": "filter[search]",
+
+    # 🧪 Testing
+    "TEST_REQUEST_RENDERER_CLASSES": (
+        "rest_framework_json_api.renderers.JSONRenderer",
     ),
-    'TEST_REQUEST_DEFAULT_FORMAT': 'vnd.api+json',
-    'DEFAULT_PERMISSION_CLASSES': [
-        # "rest_framework.permissions.IsAuthenticated",
-        # "rest_framework.permissions.AllowAny",
+    "TEST_REQUEST_DEFAULT_FORMAT": "vnd.api+json",
+
+    # 🔐 Permissions
+    "DEFAULT_PERMISSION_CLASSES": (
         "apps.v1.shared.permissions.HasCompletedSignup",
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
-    'DEFAULT_PARSER_CLASSES': (
-        'rest_framework_json_api.parsers.JSONParser',
-        'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser'
     ),
-    "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
+
+    # 🔑 Authentication (JWT first)
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "rest_framework.authentication.BasicAuthentication",  # useful for docs/dev
+    ),
+
+    # 📥 Parsers (JSON:API + fallback)
+    "DEFAULT_PARSER_CLASSES": (
+        "rest_framework_json_api.parsers.JSONParser",
+        "rest_framework.parsers.FormParser",
+        "rest_framework.parsers.MultiPartParser",
+    ),
+
+    # 🚨 Exceptions & Schema
+    "EXCEPTION_HANDLER": "apps.v1.shared.exceptions.json_api_exception_handler",
     "DEFAULT_SCHEMA_CLASS": "drf_standardized_errors.openapi.AutoSchema",
 }
 
