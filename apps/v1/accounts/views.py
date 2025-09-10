@@ -17,7 +17,8 @@ from icecream import ic
 
 from apps.v1.shared.utility import send_email, check_username_phone_email, send_phone_code
 from .serializers import SignUpSerializer, UpdateUserInformation, LoginSerializer, \
-    LoginRefreshSerializer, LogoutSerializer, ResetPasswordSerializer, ForgotPasswordSerializer, ProfileSerializer, UserResponseSerializer
+    LoginRefreshSerializer, LogoutSerializer, ResetPasswordSerializer, ForgotPasswordSerializer, ProfileSerializer, \
+    UserResponseSerializer, ProfileLanguageSerializer
 from .models import Profile, User, UserConfirmation
 from ..shared.enums import AuthTypes, AuthStatuses
 
@@ -299,3 +300,12 @@ def test_login(request):
     # Now gettext will use the activated language
     ic(_("Hello, world!"))
     return Response({"message": _("Hello, world!")})
+
+class UpdateProfileLanguageView(generics.UpdateAPIView):
+    serializer_class = ProfileLanguageSerializer
+    permission_classes = (IsAuthenticated, )
+    http_method_names = ('put', )
+
+    def get_object(self):
+        # ✅ always return the current user's profile
+        return self.request.user.profile # noqa

@@ -373,3 +373,11 @@ class ForgotPasswordSerializer(serializers.Serializer):
             raise NotFound(detail="User not found")
         attrs['user'] = user.first()
         return attrs
+
+class ProfileLanguageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ["app_language"]   # ✅ only allow changing app_language
+        extra_kwargs = {
+            "app_language": {"required": True}
+        }
