@@ -2,6 +2,18 @@ from rest_framework.permissions import BasePermission
 
 
 class HasCompletedSignup(BasePermission):
+    """
+    Allows access if user has completed signup (auth_status == "done")
+    or is a superuser/staff.
+    """
+
     def has_permission(self, request, view):
-        print(getattr(request.user, "auth_status", None))
-        return getattr(request.user, "auth_status", None) == "done"
+        user = request.user
+        if not user or not user.is_authenticated:
+            return False
+
+        return (
+            getattr(user, "auth_status", None) == "done"
+            or user.is_superuser
+            or user.is_staff
+        )
