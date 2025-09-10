@@ -22,6 +22,7 @@ urlpatterns = [
 
     # Your app endpoints
     path(API_V1_URL + 'accounts/', include('apps.v1.accounts.urls')),
+    path(API_V1_URL + 'notifications/', include('apps.v1.notifications.urls')),
 ]
 
 # Serve media and static files in development
