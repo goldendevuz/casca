@@ -14,7 +14,7 @@ class UserNotification(BaseModel):
         help_text=_("The profile that receives this notification"),
     )
     notification = models.ForeignKey(
-        to="content.Notification",
+        to="notifications.Notification",
         on_delete=models.CASCADE,
         related_name="user_notifications",
         verbose_name=_("Notification"),
