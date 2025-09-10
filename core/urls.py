@@ -22,6 +22,7 @@ urlpatterns = [
 
     # Your app endpoints
     path(API_V1_URL + 'accounts/', include('apps.v1.accounts.urls')),
+    path(API_V1_URL + 'content/', include('apps.v1.content.urls')),
 ]
 
 # Serve media and static files in development
